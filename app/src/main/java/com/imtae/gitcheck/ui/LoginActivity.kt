@@ -11,7 +11,4 @@ class LoginActivity : BaseActivity() {
         setContentView(R.layout.activity_login)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
 }
