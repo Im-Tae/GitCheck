@@ -1,7 +1,8 @@
-package com.imtae
+package com.imtae.gitcheck
 
 import android.app.Application
 import com.imtae.gitcheck.di.modules.activityModule
+import com.imtae.gitcheck.di.modules.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -11,6 +12,7 @@ class MyApplication : Application() {
         startKoin {
             androidContext(this@MyApplication)
             modules(
+                appModule,
                 activityModule
             )
         }

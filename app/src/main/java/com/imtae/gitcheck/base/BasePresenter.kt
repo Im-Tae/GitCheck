@@ -4,4 +4,5 @@ interface BasePresenter<T> {
 
     val view: T
 
+    fun setToastMessage()
 }

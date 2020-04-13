@@ -1,8 +1,16 @@
 package com.imtae.gitcheck.base
 
+import com.imtae.gitcheck.utils.ProgressUtil
+
 interface BaseView<T> {
 
-    val presenter: T
+    val presenter : T
+    val progress : ProgressUtil
 
+    fun showProgress()
+
+    fun hideProgress()
+
+    fun showToast(message: String)
 
 }
