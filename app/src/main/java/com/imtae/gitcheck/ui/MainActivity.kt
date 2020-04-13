@@ -19,9 +19,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //presenter.setToastMessage()
-        showProgress()
-        //presenter.progress()
+
 
     }
 

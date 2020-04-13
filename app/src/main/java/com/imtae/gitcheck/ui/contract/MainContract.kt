@@ -5,9 +5,11 @@ import com.imtae.gitcheck.base.BaseView
 
 class MainContract {
 
-    interface View : BaseView<Presenter>
+    interface View : BaseView<Presenter> {
+
+    }
 
     interface Presenter : BasePresenter<View> {
-        fun progress()
+
     }
 }
