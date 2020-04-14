@@ -3,8 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/login_layout"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:padding="10dp"
+    android:layout_height="210dp"
+    android:paddingTop="20dp"
     android:orientation="vertical"
     android:background="@color/github_color"
     >
@@ -21,6 +21,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
         android:textSize="20dp"
         android:gravity="center"
         style="@style/white_font_style_bold"
