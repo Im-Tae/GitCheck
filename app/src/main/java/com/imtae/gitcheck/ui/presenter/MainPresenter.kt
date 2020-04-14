@@ -18,8 +18,9 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
         view.showProgress()
         view.init()
 
+        // test
         Observable.interval(2, TimeUnit.SECONDS)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { view.hideProgress() } as CompositeDisposable
+            .subscribe { view.hideProgress() }
     }
 }

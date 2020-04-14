@@ -20,6 +20,33 @@
             layout="@layout/tool_bar"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="30sp"
+                style="@style/black_font_style_bold"
+                android:text="아무것도 없네요!"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                style="@style/black_font_style_basic"
+                android:text="검색을 통해 다른 사용자의 커밋을 확인하세요."
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView

@@ -42,7 +42,10 @@ class MainActivity : BaseActivity(), MainContract.View {
                     .subscribe { hideKeyboard() }
             }
 
-            R.id.search_button -> presenter.searchUser()
+            R.id.search_button -> {
+                search_bar.visibility = View.VISIBLE
+                presenter.searchUser()
+            }
         }
     }
 
