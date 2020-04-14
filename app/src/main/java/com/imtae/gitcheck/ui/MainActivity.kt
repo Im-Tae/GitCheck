@@ -21,7 +21,6 @@ class MainActivity : BaseActivity(), MainContract.View {
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
     override val progress : ProgressUtil by inject { parametersOf(this) }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,18 +32,24 @@ class MainActivity : BaseActivity(), MainContract.View {
         navigation_view.setNavigationItemSelectedListener(this)
         show_navigation_bar_button.setOnClickListener(this)
         search_button.setOnClickListener(this)
+        back_button.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
         when(view.id) {
             R.id.show_navigation_bar_button -> {
                 Observable.just(drawer_layout.openDrawer(GravityCompat.START))
-                    .subscribe { hideKeyboard() }
+                    .subscribe()
             }
 
             R.id.search_button -> {
-                search_bar.visibility = View.VISIBLE
-                presenter.searchUser()
+                Observable.just(setToolbarSearch(), search_bar.requestFocus(), showKeyboard())
+                    .subscribe()
+            }
+
+            R.id.back_button -> {
+                Observable.just(hideKeyboard())
+                    .subscribe { setToolbarMain() }
             }
         }
     }
@@ -59,9 +64,25 @@ class MainActivity : BaseActivity(), MainContract.View {
         return false
     }
 
+    private fun setToolbarMain() {
+        search_bar.visibility = View.INVISIBLE
+        back_button.visibility = View.INVISIBLE
+        search_button.visibility = View.VISIBLE
+        show_navigation_bar_button.visibility = View.VISIBLE
+    }
+
+    private fun setToolbarSearch() {
+        search_bar.visibility = View.VISIBLE
+        back_button.visibility = View.VISIBLE
+        show_navigation_bar_button.visibility = View.INVISIBLE
+        search_button.visibility = View.GONE
+    }
+
     override fun hideNavigationDrawer() = drawer_layout.closeDrawers()
 
     override fun hideKeyboard() = KeyboardUtil.hideKeyboard(this.currentFocus, this)
+
+    override fun showKeyboard() = KeyboardUtil.showKeyboard(this.currentFocus, this)
 
     override fun showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 

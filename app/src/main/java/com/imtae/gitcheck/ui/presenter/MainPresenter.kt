@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit
 class MainPresenter(override val view: MainContract.View) : MainContract.Presenter {
 
     override fun searchUser() {
-        view.hideKeyboard()
 
     }
 

@@ -21,6 +21,17 @@
                 android:id="@+id/show_navigation_bar_button"
                 />
 
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:visibility="invisible"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="10dp"
+                android:id="@+id/back_button"
+                />
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,8 +48,10 @@
                 android:layout_toStartOf="@id/search_button"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:id="@+id/search_bar"
-                />
+                android:id="@+id/search_bar">
+
+                <requestFocus />
+            </EditText>
 
             <ImageView
                 android:layout_width="30dp"

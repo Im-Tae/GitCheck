@@ -13,6 +13,8 @@ interface BaseView<T> {
 
     fun hideKeyboard()
 
+    fun showKeyboard()
+
     fun showToast(message: String)
 
     fun init()
