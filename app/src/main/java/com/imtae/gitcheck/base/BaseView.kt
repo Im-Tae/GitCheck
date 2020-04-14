@@ -11,6 +11,9 @@ interface BaseView<T> {
 
     fun hideProgress()
 
+    fun hideKeyboard()
+
     fun showToast(message: String)
 
+    fun init()
 }

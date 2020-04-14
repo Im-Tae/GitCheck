@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="환경설정"
+        />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@mipmap/ic_launcher_round"
+        android:title="로그아웃"
+        />
+
+</menu>

@@ -1,11 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/github_color</item>
         <item name="colorPrimaryDark">@color/github_color</item>
-        <item name="colorAccent">@color/github_color</item>
+        <item name="colorAccent">@color/white</item>
     </style>
 
 </resources>

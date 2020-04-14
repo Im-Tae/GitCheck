@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="white_font_style_basic">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColorHighlight">@color/white</item>
+    </style>
+
+    <style name="white_font_style_bold">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>
