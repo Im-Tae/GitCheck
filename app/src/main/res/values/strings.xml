@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GitCheck</string>
+    <string name="main_title">Nothing Here!</string>
+    <string name="main_content">Search for the commit.</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_nickname">NickName</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
 </resources>

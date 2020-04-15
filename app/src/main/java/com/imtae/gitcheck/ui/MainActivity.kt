@@ -1,5 +1,7 @@
 package com.imtae.gitcheck.ui
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -11,6 +13,7 @@ import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.KeyboardUtil
 import com.imtae.gitcheck.utils.ProgressUtil
 import io.reactivex.Observable
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import org.koin.android.ext.android.inject
@@ -21,11 +24,18 @@ class MainActivity : BaseActivity(), MainContract.View {
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
     override val progress : ProgressUtil by inject { parametersOf(this) }
 
+    override val compositeDisposable: CompositeDisposable = CompositeDisposable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         presenter.getData()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.dispose()
     }
 
     override fun init() {
@@ -38,18 +48,24 @@ class MainActivity : BaseActivity(), MainContract.View {
     override fun onClick(view: View) {
         when(view.id) {
             R.id.show_navigation_bar_button -> {
-                Observable.just(drawer_layout.openDrawer(GravityCompat.START))
-                    .subscribe()
+                compositeDisposable.add(
+                    Observable.just(drawer_layout.openDrawer(GravityCompat.START))
+                        .subscribe()
+                )
             }
 
             R.id.search_button -> {
-                Observable.just(setToolbarSearch(), search_bar.requestFocus(), showKeyboard())
-                    .subscribe()
+                compositeDisposable.add(
+                    Observable.just(setToolbarSearch(), search_bar.requestFocus(), showKeyboard())
+                        .subscribe()
+                )
             }
 
             R.id.back_button -> {
-                Observable.just(hideKeyboard())
-                    .subscribe { setToolbarMain() }
+                compositeDisposable.add(
+                    Observable.just(hideKeyboard())
+                        .subscribe { setToolbarMain() }
+                )
             }
         }
     }
@@ -69,6 +85,8 @@ class MainActivity : BaseActivity(), MainContract.View {
         back_button.visibility = View.INVISIBLE
         search_button.visibility = View.VISIBLE
         show_navigation_bar_button.visibility = View.VISIBLE
+
+        search_bar.setText("")
     }
 
     private fun setToolbarSearch() {
@@ -77,6 +95,8 @@ class MainActivity : BaseActivity(), MainContract.View {
         show_navigation_bar_button.visibility = View.INVISIBLE
         search_button.visibility = View.GONE
     }
+
+    override fun startActivity(activityName: Activity) = startActivity(Intent(this, activityName::class.java))
 
     override fun hideNavigationDrawer() = drawer_layout.closeDrawers()
 

@@ -25,7 +25,7 @@
         android:textSize="20dp"
         android:gravity="center"
         style="@style/white_font_style_bold"
-        android:text="이름"/>
+        android:text="@string/profile_name"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -33,5 +33,5 @@
         android:textSize="15dp"
         android:gravity="center"
         android:textColor="@color/white"
-        android:text="닉네임"/>
+        android:text="@string/profile_nickname"/>
 </LinearLayout>
