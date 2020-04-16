@@ -24,8 +24,6 @@ class MainActivity : BaseActivity(), MainContract.View {
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
     override val progress : ProgressUtil by inject { parametersOf(this) }
 
-    override val compositeDisposable: CompositeDisposable = CompositeDisposable()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,7 +33,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.dispose()
+        presenter.clearDisposable()
     }
 
     override fun init() {
@@ -48,21 +46,21 @@ class MainActivity : BaseActivity(), MainContract.View {
     override fun onClick(view: View) {
         when(view.id) {
             R.id.show_navigation_bar_button -> {
-                compositeDisposable.add(
+                presenter.addDisposable(
                     Observable.just(drawer_layout.openDrawer(GravityCompat.START))
                         .subscribe()
                 )
             }
 
             R.id.search_button -> {
-                compositeDisposable.add(
+                presenter.addDisposable(
                     Observable.just(setToolbarSearch(), search_bar.requestFocus(), showKeyboard())
                         .subscribe()
                 )
             }
 
             R.id.back_button -> {
-                compositeDisposable.add(
+                presenter.addDisposable(
                     Observable.just(hideKeyboard())
                         .subscribe { setToolbarMain() }
                 )

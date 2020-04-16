@@ -7,38 +7,27 @@ import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.ui.contract.SplashContract
 import com.imtae.gitcheck.utils.ProgressUtil
-import com.trello.rxlifecycle3.android.ActivityEvent
-import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
-import java.util.concurrent.TimeUnit
 
 class SplashActivity : BaseActivity(), SplashContract.View {
 
     override val presenter: SplashContract.Presenter by inject { parametersOf(this) }
     override val progress: ProgressUtil by inject { parametersOf(this) }
 
-    override val compositeDisposable: CompositeDisposable = CompositeDisposable()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        presenter.checkUserInfo()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
-        compositeDisposable.dispose()
+        presenter.clearDisposable()
     }
 
-    override fun init() {
-        compositeDisposable.add(
-            Observable.interval(1000 * 3, TimeUnit.MILLISECONDS)
-                .subscribe { presenter.checkUserInfo() }
-        )
-    }
+    override fun init() {}
 
     override fun startActivity(activityName : Activity) = startActivity(Intent(this, activityName::class.java))
 
