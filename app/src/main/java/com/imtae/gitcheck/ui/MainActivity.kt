@@ -45,26 +45,23 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override fun onClick(view: View) {
         when(view.id) {
-            R.id.show_navigation_bar_button -> {
+            R.id.show_navigation_bar_button ->
                 presenter.addDisposable(
                     Observable.just(drawer_layout.openDrawer(GravityCompat.START))
                         .subscribe()
                 )
-            }
 
-            R.id.search_button -> {
+            R.id.search_button ->
                 presenter.addDisposable(
                     Observable.just(setToolbarSearch(), search_bar.requestFocus(), showKeyboard())
                         .subscribe()
                 )
-            }
 
-            R.id.back_button -> {
+            R.id.back_button ->
                 presenter.addDisposable(
                     Observable.just(hideKeyboard())
                         .subscribe { setToolbarMain() }
                 )
-            }
         }
     }
 
@@ -110,9 +107,10 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override fun onBackPressed() {
 
-        if (drawer_layout.isDrawerOpen(GravityCompat.START))
-            hideNavigationDrawer()
-        else
-            super.onBackPressed()
+        when {
+            drawer_layout.isDrawerOpen(GravityCompat.START) -> hideNavigationDrawer()
+            search_bar.visibility == View.VISIBLE -> setToolbarMain()
+            else -> super.onBackPressed()
+        }
     }
 }
