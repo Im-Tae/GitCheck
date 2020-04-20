@@ -1,12 +1,10 @@
 package com.imtae.gitcheck.base
 
-import android.app.Activity
 import com.imtae.gitcheck.utils.ProgressUtil
 
 interface BaseView<T> {
 
     val presenter : T
-    val progress : ProgressUtil
 
     fun showProgress()
 
@@ -20,5 +18,5 @@ interface BaseView<T> {
 
     fun init()
 
-    fun startActivity(activityName : Activity)
+    fun startActivity(activityName : Class<*>)
 }

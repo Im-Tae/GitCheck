@@ -1,6 +1,5 @@
 package com.imtae.gitcheck.ui
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -13,7 +12,6 @@ import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.KeyboardUtil
 import com.imtae.gitcheck.utils.ProgressUtil
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import org.koin.android.ext.android.inject
@@ -22,7 +20,8 @@ import org.koin.core.parameter.parametersOf
 class MainActivity : BaseActivity(), MainContract.View {
 
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
-    override val progress : ProgressUtil by inject { parametersOf(this) }
+
+    private val progress : ProgressUtil by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +90,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         search_button.visibility = View.GONE
     }
 
-    override fun startActivity(activityName: Activity) = startActivity(Intent(this, activityName::class.java))
+    override fun startActivity(activityName: Class<*>) = startActivity(Intent(this, activityName))
 
     override fun hideNavigationDrawer() = drawer_layout.closeDrawers()
 
