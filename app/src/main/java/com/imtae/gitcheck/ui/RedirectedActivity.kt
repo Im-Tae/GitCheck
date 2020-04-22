@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import com.imtae.gitcheck.MyApplication
+import com.imtae.gitcheck.di.app.MyApplication
 
 class RedirectedActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {

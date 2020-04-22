@@ -1,7 +1,7 @@
 package com.imtae.gitcheck.ui.presenter
 
 import android.util.Log
-import com.imtae.gitcheck.MyApplication
+import com.imtae.gitcheck.di.app.MyApplication
 import com.imtae.gitcheck.data.Key
 import com.imtae.gitcheck.retrofit.RetrofitHelper
 import com.imtae.gitcheck.retrofit.domain.AccessToken

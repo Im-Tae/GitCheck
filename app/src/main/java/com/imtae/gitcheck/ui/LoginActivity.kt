@@ -5,16 +5,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.imtae.gitcheck.MyApplication
+import com.imtae.gitcheck.di.app.MyApplication
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityLoginBinding
 import com.imtae.gitcheck.ui.contract.LoginContract
-import io.reactivex.Observable
-import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
-import java.util.concurrent.TimeUnit
 
 class LoginActivity : BaseActivity(), LoginContract.View {
 
