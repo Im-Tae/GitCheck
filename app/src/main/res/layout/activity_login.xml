@@ -1,33 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".ui.LoginActivity">
+<layout>
 
-    <ImageView
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
-        android:src="@drawable/github_logo" />
+    <data>
+        <variable
+            name="login"
+            type="com.imtae.gitcheck.ui.LoginActivity" />
+    </data>
 
-    <Button
-        android:id="@+id/login_button"
-        style="@style/white_font_style_bold"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/login_button"
+        android:layout_height="match_parent"
+        android:background="@color/white"
         android:gravity="center"
-        android:text="@string/github_login"
-        android:textSize="30dp" />
+        android:orientation="vertical"
+        tools:context=".ui.LoginActivity">
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:src="@drawable/github_logo" />
+
+        <Button
+            android:id="@+id/login_button"
+            style="@style/white_font_style_bold"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/login_button"
+            android:gravity="center"
+            android:text="@string/github_login"
+            android:onClick="@{() -> login.init()}"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+</layout>

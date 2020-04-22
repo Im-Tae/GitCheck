@@ -1,10 +1,11 @@
 package com.imtae.gitcheck.base
 
-import com.imtae.gitcheck.utils.ProgressUtil
+import androidx.databinding.ViewDataBinding
 
 interface BaseView<T> {
 
     val presenter : T
+    val binding : ViewDataBinding
 
     fun showProgress()
 

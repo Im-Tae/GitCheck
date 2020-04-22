@@ -47,9 +47,9 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith (object : DisposableObserver<AccessToken>() {
-                    override fun onNext(t: AccessToken) {
-                        Log.d("token", t.accessToken)
-                        getUserName("token ${t.accessToken}")
+                    override fun onNext(accessToken: AccessToken) {
+                        pref.setData(Key.Access_Token.toString(), accessToken.accessToken)
+                        getUserName("token ${accessToken.accessToken}")
                     }
 
                     override fun onComplete() {}
@@ -67,17 +67,13 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
                 .subscribeWith(object : DisposableObserver<User>() {
 
                     override fun onNext(user: User) {
-                        //Log.d("user", user.toString())
-                        pref.setData(Key.Image.toString(), user.avatar_url)
-                        pref.setData(Key.Name.toString(), user.name)
-                        pref.setData(Key.NickName.toString(), user.login)
+                        Log.d("userInfo", user.toString())
+                        pref.setUserInfo(Key.User_Info.toString(), user)
                     }
 
-                    override fun onComplete() {
-                        view.startActivity(MainActivity::class.java)
-                    }
+                    override fun onComplete() = view.startActivity(MainActivity::class.java)
 
-                    override fun onError(e: Throwable) {}
+                    override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
                 })
         )
     }

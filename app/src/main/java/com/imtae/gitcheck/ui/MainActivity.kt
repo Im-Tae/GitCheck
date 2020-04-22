@@ -6,15 +6,18 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
-import com.imtae.gitcheck.data.Key
+import com.imtae.gitcheck.databinding.ActivityMainBinding
+import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.KeyboardUtil
-import com.imtae.gitcheck.utils.PreferenceManager
 import com.imtae.gitcheck.utils.ProgressUtil
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_header.view.*
 import kotlinx.android.synthetic.main.tool_bar.*
@@ -24,23 +27,24 @@ import org.koin.core.parameter.parametersOf
 class MainActivity : BaseActivity(), MainContract.View {
 
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
-
     private val progress : ProgressUtil by inject { parametersOf(this) }
-    private val pref : PreferenceManager by inject { parametersOf(this) }
+
+    override lateinit var binding: ActivityMainBinding
+
+    lateinit var user : User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        binding.main = this
 
-        // test
-        val headerView = navigation_view.getHeaderView(0)
+        presenter.addDisposable(
+            Observable.just(presenter.getUserData())
+                .subscribe { data -> user = data }
+        )
 
-        Picasso.get().load(pref.getData(Key.Image.toString())).into(headerView.header_image)
-        headerView.header_name.text = pref.getData(Key.Name.toString())
-        headerView.header_nickname.text = pref.getData(Key.NickName.toString())
-
-        presenter.getData()
+        setDrawerUserUI()
     }
 
     override fun onDestroy() {
@@ -87,6 +91,14 @@ class MainActivity : BaseActivity(), MainContract.View {
         return false
     }
 
+    private fun setDrawerUserUI() {
+        val headerView = navigation_view.getHeaderView(0)
+
+        Picasso.get().load(user.avatar_url).into(headerView.header_image)
+        headerView.header_name.text = user.name
+        headerView.header_nickname.text = user.login
+    }
+
     private fun setToolbarMain() {
         search_bar.visibility = View.INVISIBLE
         back_button.visibility = View.INVISIBLE
@@ -123,6 +135,7 @@ class MainActivity : BaseActivity(), MainContract.View {
             drawer_layout.isDrawerOpen(GravityCompat.START) -> hideNavigationDrawer()
             search_bar.visibility == View.VISIBLE -> setToolbarMain()
             else -> super.onBackPressed()
+
         }
     }
 }
