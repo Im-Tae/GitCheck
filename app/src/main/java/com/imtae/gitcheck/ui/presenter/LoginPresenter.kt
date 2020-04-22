@@ -2,8 +2,10 @@ package com.imtae.gitcheck.ui.presenter
 
 import android.util.Log
 import com.imtae.gitcheck.MyApplication
+import com.imtae.gitcheck.data.Key
 import com.imtae.gitcheck.retrofit.RetrofitHelper
 import com.imtae.gitcheck.retrofit.domain.AccessToken
+import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.LoginContract
 import com.imtae.gitcheck.utils.PreferenceManager
@@ -21,6 +23,7 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
 
     private val pref : PreferenceManager by inject { parametersOf(this) }
     private val getToken = RetrofitHelper.getToken()
+    private val getUserInfo = RetrofitHelper.getUserInfo()
 
     override fun loginGithub() {
         val httpUrl = HttpUrl.Builder()
@@ -46,20 +49,38 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
                 .subscribeWith (object : DisposableObserver<AccessToken>() {
                     override fun onNext(t: AccessToken) {
                         Log.d("token", t.accessToken)
+                        getUserName("token ${t.accessToken}")
+                    }
+
+                    override fun onComplete() {}
+
+                    override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
+                } )
+        )
+    }
+
+    private fun getUserName(token: String) {
+        addDisposable(
+            getUserInfo.getUserInfo(token)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(object : DisposableObserver<User>() {
+
+                    override fun onNext(user: User) {
+                        //Log.d("user", user.toString())
+                        pref.setData(Key.Image.toString(), user.avatar_url)
+                        pref.setData(Key.Name.toString(), user.name)
+                        pref.setData(Key.NickName.toString(), user.login)
                     }
 
                     override fun onComplete() {
                         view.startActivity(MainActivity::class.java)
                     }
 
-                    override fun onError(e: Throwable) {
-                        Log.d("error", e.message.toString())
-                    }
-                } )
+                    override fun onError(e: Throwable) {}
+                })
         )
     }
-
-    private fun saveToken(token : String) = pref.setData("Access_Token", token)
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 

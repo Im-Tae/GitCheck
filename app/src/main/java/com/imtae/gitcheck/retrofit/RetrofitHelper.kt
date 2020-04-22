@@ -1,7 +1,9 @@
 package com.imtae.gitcheck.retrofit
 
+import com.google.gson.GsonBuilder
 import com.imtae.gitcheck.MyApplication
 import com.imtae.gitcheck.retrofit.network.TokenApi
+import com.imtae.gitcheck.retrofit.network.UserApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -28,6 +30,16 @@ class RetrofitHelper {
                 .build()
 
             return retrofit.create(TokenApi::class.java)
+        }
+
+        fun getUserInfo(): UserApi {
+            val retrofit = Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl(MyApplication.API_URL)
+                .build()
+
+            return retrofit.create(UserApi::class.java)
         }
     }
 }

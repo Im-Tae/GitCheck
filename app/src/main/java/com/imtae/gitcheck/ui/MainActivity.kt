@@ -8,11 +8,15 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
+import com.imtae.gitcheck.data.Key
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.KeyboardUtil
+import com.imtae.gitcheck.utils.PreferenceManager
 import com.imtae.gitcheck.utils.ProgressUtil
+import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.navigation_header.view.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -22,10 +26,19 @@ class MainActivity : BaseActivity(), MainContract.View {
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
 
     private val progress : ProgressUtil by inject { parametersOf(this) }
+    private val pref : PreferenceManager by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        // test
+        val headerView = navigation_view.getHeaderView(0)
+
+        Picasso.get().load(pref.getData(Key.Image.toString())).into(headerView.header_image)
+        headerView.header_name.text = pref.getData(Key.Name.toString())
+        headerView.header_nickname.text = pref.getData(Key.NickName.toString())
 
         presenter.getData()
     }
@@ -68,7 +81,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
         when(item.itemId) {
             R.id.nav_settings -> {}
-            R.id.login_layout -> {}
+            R.id.nav_logout -> {}
         }
 
         return false

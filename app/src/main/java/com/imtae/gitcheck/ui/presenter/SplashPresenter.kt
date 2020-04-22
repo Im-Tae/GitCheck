@@ -1,5 +1,6 @@
 package com.imtae.gitcheck.ui.presenter
 
+import com.imtae.gitcheck.data.Key
 import com.imtae.gitcheck.ui.LoginActivity
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.SplashContract
@@ -20,7 +21,7 @@ class SplashPresenter(override val view: SplashContract.View) : SplashContract.P
 
     override fun checkUserInfo() {
 
-        if (pref.getData("user") != "") {
+        if (pref.getData(Key.Access_Token.toString()) != null) {
             view.startActivity(MainActivity::class.java)
         } else {
             addDisposable(
