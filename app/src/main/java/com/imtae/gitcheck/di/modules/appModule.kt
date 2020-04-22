@@ -1,6 +1,7 @@
 package com.imtae.gitcheck.di.modules
 
 import android.content.Context
+import com.imtae.gitcheck.utils.NetworkUtil
 import com.imtae.gitcheck.utils.PreferenceManager
 import com.imtae.gitcheck.utils.ProgressUtil
 import org.koin.android.ext.koin.androidContext
@@ -10,4 +11,6 @@ val appModule = module {
     factory { (context: Context) -> ProgressUtil(context) }
 
     single { PreferenceManager(androidContext()) }
+
+    single { NetworkUtil(androidContext()) }
 }

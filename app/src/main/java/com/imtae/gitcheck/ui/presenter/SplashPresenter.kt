@@ -4,6 +4,7 @@ import com.imtae.gitcheck.data.Key
 import com.imtae.gitcheck.ui.LoginActivity
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.SplashContract
+import com.imtae.gitcheck.utils.NetworkUtil
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -18,16 +19,19 @@ class SplashPresenter(override val view: SplashContract.View) : SplashContract.P
     override val compositeDisposable : CompositeDisposable = CompositeDisposable()
 
     private val pref : PreferenceManager by inject { parametersOf(this) }
+    private val networkUtil : NetworkUtil by inject { parametersOf(this) }
 
     override fun checkUserInfo() {
 
-        if (pref.getData(Key.Access_Token.toString()) != null) {
-            view.startActivity(MainActivity::class.java)
-        } else {
-            addDisposable(
-                Observable.interval(1000 * 3, TimeUnit.MILLISECONDS)
-                    .subscribe { view.startActivity(LoginActivity::class.java) }
-            )
+        when {
+            pref.getData(Key.Access_Token.toString()) != null && networkUtil.networkInfo() -> view.startActivity(MainActivity::class.java)
+            !networkUtil.networkInfo() -> {}
+            else -> {
+                addDisposable(
+                    Observable.interval(1000 * 3, TimeUnit.MILLISECONDS)
+                        .subscribe { view.startActivity(LoginActivity::class.java) }
+                )
+            }
         }
     }
 
