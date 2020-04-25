@@ -18,8 +18,11 @@ import com.imtae.gitcheck.utils.ProgressUtil
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.navigation_header.*
 import kotlinx.android.synthetic.main.navigation_header.view.*
+import kotlinx.android.synthetic.main.navigation_header.view.header_layout
 import kotlinx.android.synthetic.main.tool_bar.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -31,7 +34,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override lateinit var binding: ActivityMainBinding
 
-    lateinit var user : User
+    private val user : User = presenter.getUserData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,12 +42,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
         binding.main = this
 
-        presenter.addDisposable(
-            Observable.just(presenter.getUserData())
-                .subscribe { data -> user = data }
-        )
-
-        setDrawerUserUI()
+        init()
     }
 
     override fun onDestroy() {
@@ -57,6 +55,8 @@ class MainActivity : BaseActivity(), MainContract.View {
         show_navigation_bar_button.setOnClickListener(this)
         search_button.setOnClickListener(this)
         back_button.setOnClickListener(this)
+
+        setDrawerUserUI()
     }
 
     override fun onClick(view: View) {
@@ -96,6 +96,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     private fun setDrawerUserUI() {
         val headerView = navigation_view.getHeaderView(0)
+        headerView.header_layout.setOnClickListener(this)
 
         Picasso.get().load(user.avatar_url).into(headerView.header_image)
         headerView.header_name.text = user.name

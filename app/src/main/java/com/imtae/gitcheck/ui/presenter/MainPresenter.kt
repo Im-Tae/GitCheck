@@ -10,14 +10,16 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.observers.DisposableObserver
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 
 class MainPresenter(override val view: MainContract.View) : MainContract.Presenter, KoinComponent {
 
-    override val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val pref : PreferenceManager by inject { parametersOf(this) }
+
+    override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun searchUser() {
 
@@ -28,21 +30,9 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
         view.startActivity(LoginActivity::class.java)
     }
 
-    override fun getUserData() : User {
-        view.showProgress()
+    override fun getUserData() : User = pref.getUserInfo(Key.User_Info.toString())
 
-        addDisposable(
-            Observable.just(view.init())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { view.hideProgress() }
-        )
-
-        return pref.getUserInfo(Key.User_Info.toString())
-    }
-
-    override fun addDisposable(disposable: Disposable) {
-        compositeDisposable.add(disposable)
-    }
+    override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }
 
     override fun clearDisposable() = compositeDisposable.clear()
 }

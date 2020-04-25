@@ -65,7 +65,6 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(object : DisposableObserver<User>() {
-
                     override fun onNext(user: User) {
                         Log.d("userInfo", user.toString())
                         pref.setUserInfo(Key.User_Info.toString(), user)

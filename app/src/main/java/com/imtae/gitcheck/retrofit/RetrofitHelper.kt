@@ -1,6 +1,5 @@
 package com.imtae.gitcheck.retrofit
 
-import com.google.gson.GsonBuilder
 import com.imtae.gitcheck.di.app.MyApplication
 import com.imtae.gitcheck.retrofit.network.TokenApi
 import com.imtae.gitcheck.retrofit.network.UserApi
