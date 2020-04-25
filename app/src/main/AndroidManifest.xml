@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.ProfileActivity"/>
         <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LoginActivity" >
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -32,7 +33,7 @@
                     android:scheme="gitcheck" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".base.BaseActivity" />
     </application>
 

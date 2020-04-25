@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityMainBinding
@@ -17,10 +16,7 @@ import com.imtae.gitcheck.utils.KeyboardUtil
 import com.imtae.gitcheck.utils.ProgressUtil
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableObserver
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.navigation_header.*
 import kotlinx.android.synthetic.main.navigation_header.view.*
 import kotlinx.android.synthetic.main.navigation_header.view.header_layout
 import kotlinx.android.synthetic.main.tool_bar.*
@@ -35,12 +31,14 @@ class MainActivity : BaseActivity(), MainContract.View {
     override lateinit var binding: ActivityMainBinding
 
     private val user : User = presenter.getUserData()
+    private lateinit var headerView : View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         binding.main = this
+
+        headerView = navigation_view.getHeaderView(0)
 
         init()
     }
@@ -53,6 +51,7 @@ class MainActivity : BaseActivity(), MainContract.View {
     override fun init() {
         navigation_view.setNavigationItemSelectedListener(this)
         show_navigation_bar_button.setOnClickListener(this)
+        headerView.header_layout.setOnClickListener(this)
         search_button.setOnClickListener(this)
         back_button.setOnClickListener(this)
 
@@ -65,6 +64,12 @@ class MainActivity : BaseActivity(), MainContract.View {
                 presenter.addDisposable(
                     Observable.just(drawer_layout.openDrawer(GravityCompat.START))
                         .subscribe()
+                )
+
+            R.id.header_layout ->
+                presenter.addDisposable(
+                    Observable.just(hideNavigationDrawer())
+                        .subscribe { startActivity(ProfileActivity::class.java) }
                 )
 
             R.id.search_button ->
@@ -95,9 +100,6 @@ class MainActivity : BaseActivity(), MainContract.View {
     }
 
     private fun setDrawerUserUI() {
-        val headerView = navigation_view.getHeaderView(0)
-        headerView.header_layout.setOnClickListener(this)
-
         Picasso.get().load(user.avatar_url).into(headerView.header_image)
         headerView.header_name.text = user.name
         headerView.header_nickname.text = user.login
