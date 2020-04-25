@@ -14,13 +14,12 @@ class RetrofitHelper {
 
     companion object {
 
-        fun getToken(): TokenApi {
-            val logInterceptor = HttpLoggingInterceptor()
-            logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        private val logInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        private val client = OkHttpClient.Builder()
+            .addInterceptor(logInterceptor)
+            .build()
 
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logInterceptor)
-                .build()
+        fun getToken(): TokenApi {
 
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
@@ -34,8 +33,9 @@ class RetrofitHelper {
 
         fun getUserInfo(): UserApi {
             val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(client)
                 .baseUrl(MyApplication.API_URL)
                 .build()
 
