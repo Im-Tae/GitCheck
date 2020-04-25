@@ -38,6 +38,11 @@ class LoginActivity : BaseActivity(), LoginContract.View {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.clearDisposable()
+    }
+
     override fun init() = presenter.loginGithub()
 
     override fun showGithubWebView(url : String) = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
@@ -56,5 +61,6 @@ class LoginActivity : BaseActivity(), LoginContract.View {
         startActivity(Intent(this, activityName))
         finish()
     }
+
 
 }

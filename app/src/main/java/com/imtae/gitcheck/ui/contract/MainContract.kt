@@ -15,5 +15,7 @@ class MainContract {
         fun searchUser()
 
         fun getUserData() : User
+
+        fun logout()
     }
 }

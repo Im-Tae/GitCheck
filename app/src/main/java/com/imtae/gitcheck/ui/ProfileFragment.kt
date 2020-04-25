@@ -39,4 +39,9 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
 
     override fun startActivity(activityName: Class<*>) {}
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.clearDisposable()
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.imtae.gitcheck.ui.presenter
 
-import com.imtae.gitcheck.data.Key
+import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.ui.LoginActivity
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.SplashContract
@@ -24,7 +24,7 @@ class SplashPresenter(override val view: SplashContract.View) : SplashContract.P
     override fun checkUserInfo() {
 
         when {
-            pref.getData(Key.Access_Token.toString()) != null && networkUtil.networkInfo() -> view.startActivity(MainActivity::class.java)
+            pref.getData(Key.Access_Token.toString()) != Key.NULL.toString() && networkUtil.networkInfo() -> view.startActivity(MainActivity::class.java)
             !networkUtil.networkInfo() -> {}
             else -> {
                 addDisposable(

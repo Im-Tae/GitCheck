@@ -85,7 +85,10 @@ class MainActivity : BaseActivity(), MainContract.View {
 
         when(item.itemId) {
             R.id.nav_settings -> {}
-            R.id.nav_logout -> {}
+            R.id.nav_logout -> {
+                presenter.logout()
+                finish()
+            }
         }
 
         return false

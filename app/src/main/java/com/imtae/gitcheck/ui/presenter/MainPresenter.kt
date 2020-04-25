@@ -1,7 +1,9 @@
 package com.imtae.gitcheck.ui.presenter
 
-import com.imtae.gitcheck.data.Key
+import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.User
+import com.imtae.gitcheck.ui.LoginActivity
+import com.imtae.gitcheck.ui.SplashActivity
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.Observable
@@ -19,6 +21,11 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
 
     override fun searchUser() {
 
+    }
+
+    override fun logout() {
+        pref.setData(Key.Access_Token.toString(), Key.NULL.toString())
+        view.startActivity(LoginActivity::class.java)
     }
 
     override fun getUserData() : User {
