@@ -69,7 +69,7 @@ class MainActivity : BaseActivity(), MainContract.View {
             R.id.header_layout ->
                 presenter.addDisposable(
                     Observable.just(hideNavigationDrawer())
-                        .subscribe { startActivity(ProfileActivity::class.java) }
+                        .subscribe { supportFragmentManager.beginTransaction().add(R.id.drawer_layout, ProfileFragment()).commit() }
                 )
 
             R.id.search_button ->

@@ -23,8 +23,4 @@ val activityModule = module {
     factory<MainContract.Presenter> {
         (view: MainContract.View) -> MainPresenter(view)
     }
-
-    factory<ProfileContract.Presenter> {
-            (view: ProfileContract.View) -> ProfilePresenter(view)
-    }
 }
