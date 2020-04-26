@@ -32,7 +32,6 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override lateinit var binding: ActivityMainBinding
 
-    //private val user : User = presenter.getUserData()
     private lateinit var headerView : View
 
     override fun onCreate(savedInstanceState: Bundle?) {

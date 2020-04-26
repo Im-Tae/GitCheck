@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.ProfileFragment"
-    android:background="@color/white"
-    android:orientation="vertical"
-    android:clickable="true"
-    android:focusable="true">
+<layout>
+    <data>
+        <variable
+            name="profile"
+            type="com.imtae.gitcheck.ui.ProfileFragment" />
+    </data>
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:layout_height="match_parent"
+        tools:context=".ui.ProfileFragment"
+        android:background="@color/white"
         android:orientation="vertical"
-        android:background="@color/github_color"
-        >
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="vertical"
+            android:background="@color/github_color"
+            >
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+</layout>
