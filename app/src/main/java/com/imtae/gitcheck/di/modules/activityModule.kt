@@ -2,11 +2,9 @@ package com.imtae.gitcheck.di.modules
 
 import com.imtae.gitcheck.ui.contract.LoginContract
 import com.imtae.gitcheck.ui.contract.MainContract
-import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.ui.contract.SplashContract
 import com.imtae.gitcheck.ui.presenter.LoginPresenter
 import com.imtae.gitcheck.ui.presenter.MainPresenter
-import com.imtae.gitcheck.ui.presenter.ProfilePresenter
 import com.imtae.gitcheck.ui.presenter.SplashPresenter
 import org.koin.dsl.module
 

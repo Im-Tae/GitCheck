@@ -4,7 +4,6 @@ import com.google.android.material.navigation.NavigationView
 import com.imtae.gitcheck.base.BasePresenter
 import com.imtae.gitcheck.base.BaseView
 import com.imtae.gitcheck.retrofit.domain.User
-import io.reactivex.observers.DisposableObserver
 
 class MainContract {
 

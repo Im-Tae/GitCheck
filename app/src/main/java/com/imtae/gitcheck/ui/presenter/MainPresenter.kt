@@ -3,14 +3,10 @@ package com.imtae.gitcheck.ui.presenter
 import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.LoginActivity
-import com.imtae.gitcheck.ui.SplashActivity
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.PreferenceManager
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf

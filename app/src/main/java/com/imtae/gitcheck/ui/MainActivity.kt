@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityMainBinding
