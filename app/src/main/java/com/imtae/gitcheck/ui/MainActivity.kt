@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityMainBinding
@@ -70,7 +71,11 @@ class MainActivity : BaseActivity(), MainContract.View {
                 presenter.addDisposable(
                     Observable.just(hideNavigationDrawer())
                         .subscribe {
-                            supportFragmentManager.beginTransaction().add(R.id.drawer_layout, ProfileFragment()).addToBackStack(null).commit()
+                            supportFragmentManager.beginTransaction()
+                                .setCustomAnimations(R.anim.slide_up,0,0, R.anim.slide_down)
+                                .add(R.id.drawer_layout, ProfileFragment())
+                                .addToBackStack(null)
+                                .commit()
                         }
                 )
 

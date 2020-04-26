@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import androidx.drawerlayout.widget.DrawerLayout
 
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseFragment
 import com.imtae.gitcheck.ui.contract.ProfileContract
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
@@ -18,6 +20,7 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
     override lateinit var binding: ViewDataBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        activity?.drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
@@ -27,6 +30,7 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
+        activity?.drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
         presenter.clearDisposable()
     }
 
