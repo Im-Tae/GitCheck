@@ -22,15 +22,17 @@ import kotlinx.android.synthetic.main.navigation_header.view.header_layout
 import kotlinx.android.synthetic.main.tool_bar.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.named
 
 class MainActivity : BaseActivity(), MainContract.View {
 
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
     private val progress : ProgressUtil by inject { parametersOf(this) }
+    private val user : User by inject(named("getUserInfo"))
 
     override lateinit var binding: ActivityMainBinding
 
-    private val user : User = presenter.getUserData()
+    //private val user : User = presenter.getUserData()
     private lateinit var headerView : View
 
     override fun onCreate(savedInstanceState: Bundle?) {

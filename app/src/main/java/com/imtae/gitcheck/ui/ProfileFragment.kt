@@ -9,14 +9,17 @@ import androidx.drawerlayout.widget.DrawerLayout
 
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseFragment
+import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.named
 
 class ProfileFragment : BaseFragment(), ProfileContract.View {
 
     override val presenter: ProfileContract.Presenter by inject { parametersOf(this) }
+    private val user : User by inject(named("getUserInfo"))
     override lateinit var binding: ViewDataBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
