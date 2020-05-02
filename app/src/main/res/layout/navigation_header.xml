@@ -4,14 +4,17 @@
         <variable
             name="headerNavigation"
             type="com.imtae.gitcheck.ui.MainActivity" />
+
+            <import type="android.view.View"/>
     </data>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:paddingTop="30dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
         android:orientation="vertical"
         android:background="@color/github_color"
         >
@@ -33,6 +36,7 @@
             android:textSize="20dp"
             android:gravity="center"
             style="@style/white_font_style_bold"
+            android:visibility="@{headerNavigation.user.name == null  ? View.GONE : View.VISIBLE}"
             android:text="@{headerNavigation.user.name}"/>
 
         <TextView

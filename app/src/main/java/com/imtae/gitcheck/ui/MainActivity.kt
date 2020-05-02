@@ -18,7 +18,6 @@ import com.imtae.gitcheck.utils.ProgressUtil
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.navigation_header.view.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf

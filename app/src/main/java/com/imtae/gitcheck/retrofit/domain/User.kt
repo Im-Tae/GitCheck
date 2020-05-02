@@ -19,7 +19,7 @@ data class User(
     val receivedEvents_url: String = "",
     val type: String = "",
     val site_admin: Boolean = false,
-    val name: String = "",
+    val name: String? = null,
     val company: String = "",
     val blog: String = "",
     val location: String = "",
