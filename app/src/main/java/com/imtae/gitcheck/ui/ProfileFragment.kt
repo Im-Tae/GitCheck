@@ -22,13 +22,14 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
 
     override val presenter: ProfileContract.Presenter by inject { parametersOf(this) }
     val user : User by inject(named("getUserInfo"))
+
     override lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         activity?.drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
         binding.profile = this
-
 
         return binding.root
     }

@@ -15,8 +15,6 @@ class MainContract {
     interface Presenter : BasePresenter<View> {
         fun searchUser()
 
-        fun getUserData() : User
-
         fun logout()
     }
 }

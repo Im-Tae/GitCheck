@@ -26,8 +26,6 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
         view.startActivity(LoginActivity::class.java)
     }
 
-    override fun getUserData() : User = pref.getUserInfo(Key.User_Info.toString())
-
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }
 
     override fun clearDisposable() = compositeDisposable.clear()

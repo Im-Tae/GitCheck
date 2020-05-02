@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityMainBinding
+import com.imtae.gitcheck.databinding.NavigationHeaderBinding
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.KeyboardUtil
@@ -18,7 +19,6 @@ import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_header.view.*
-import kotlinx.android.synthetic.main.navigation_header.view.header_layout
 import kotlinx.android.synthetic.main.tool_bar.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -28,18 +28,19 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
     private val progress : ProgressUtil by inject { parametersOf(this) }
-    private val user : User by inject(named("getUserInfo"))
+    val user : User by inject(named("getUserInfo"))
 
     override lateinit var binding: ActivityMainBinding
-
-    private lateinit var headerView : View
+    private lateinit var bindingNavigationHeader : NavigationHeaderBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.main = this
 
-        headerView = navigation_view.getHeaderView(0)
+        bindingNavigationHeader = NavigationHeaderBinding.bind(navigation_view.getHeaderView(0))
+        bindingNavigationHeader.headerNavigation = this
 
         init()
     }
@@ -50,13 +51,14 @@ class MainActivity : BaseActivity(), MainContract.View {
     }
 
     override fun init() {
+        Picasso.get().load(user.avatar_url).into(bindingNavigationHeader.headerImage)
+
         navigation_view.setNavigationItemSelectedListener(this)
         show_navigation_bar_button.setOnClickListener(this)
-        headerView.header_layout.setOnClickListener(this)
         search_button.setOnClickListener(this)
         back_button.setOnClickListener(this)
 
-        setDrawerUserUI()
+        bindingNavigationHeader.headerLayout.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
@@ -65,18 +67,6 @@ class MainActivity : BaseActivity(), MainContract.View {
                 presenter.addDisposable(
                     Observable.just(drawer_layout.openDrawer(GravityCompat.START))
                         .subscribe()
-                )
-
-            R.id.header_layout ->
-                presenter.addDisposable(
-                    Observable.just(hideNavigationDrawer())
-                        .subscribe {
-                            supportFragmentManager.beginTransaction()
-                                .setCustomAnimations(R.anim.slide_up,0,0, R.anim.slide_down)
-                                .add(R.id.drawer_layout, ProfileFragment())
-                                .addToBackStack(null)
-                                .commit()
-                        }
                 )
 
             R.id.search_button ->
@@ -89,6 +79,18 @@ class MainActivity : BaseActivity(), MainContract.View {
                 presenter.addDisposable(
                     Observable.just(hideKeyboard())
                         .subscribe { setToolbarMain() }
+                )
+
+            R.id.header_layout ->
+                presenter.addDisposable(
+                    Observable.just(hideNavigationDrawer())
+                        .subscribe {
+                            supportFragmentManager.beginTransaction()
+                                .setCustomAnimations(R.anim.slide_up,0,0, R.anim.slide_down)
+                                .add(R.id.drawer_layout, ProfileFragment())
+                                .addToBackStack(null)
+                                .commit()
+                        }
                 )
         }
     }
@@ -104,12 +106,6 @@ class MainActivity : BaseActivity(), MainContract.View {
         }
 
         return false
-    }
-
-    private fun setDrawerUserUI() {
-        Picasso.get().load(user.avatar_url).into(headerView.header_image)
-        headerView.header_name.text = user.name
-        headerView.header_nickname.text = user.login
     }
 
     private fun setToolbarMain() {

@@ -18,4 +18,5 @@ class PreferenceManager(context : Context) {
     fun getUserInfo(key: String) : User = GsonBuilder().create().fromJson(pref.getString(key, null), User::class.java)
 
     fun setUserInfo(key : String, user : User) = pref.edit().putString(key, GsonBuilder().create().toJson(user, User::class.java)).commit()
+
 }

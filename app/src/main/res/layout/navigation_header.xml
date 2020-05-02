@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/header_layout"
-    android:layout_width="match_parent"
-    android:layout_height="220dp"
-    android:paddingTop="30dp"
-    android:orientation="vertical"
-    android:background="@color/github_color"
-    >
+<layout>
+    <data>
+        <variable
+            name="headerNavigation"
+            type="com.imtae.gitcheck.ui.MainActivity" />
+    </data>
 
-    <ImageView
-        android:id="@+id/header_image"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/ic_person_black_24dp"
-        />
-
-    <TextView
-        android:id="@+id/header_name"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/header_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:textSize="20dp"
-        android:gravity="center"
-        style="@style/white_font_style_bold"
-        android:text="@string/profile_name"/>
+        android:layout_height="220dp"
+        android:paddingTop="30dp"
+        android:orientation="vertical"
+        android:background="@color/github_color"
+        >
 
-    <TextView
-        android:id="@+id/header_nickname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:text="@string/profile_nickname"/>
-</LinearLayout>
+        <ImageView
+            android:id="@+id/header_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_person_black_24dp"
+            />
+
+        <TextView
+            android:id="@+id/header_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:textSize="20dp"
+            android:gravity="center"
+            style="@style/white_font_style_bold"
+            android:text="@{headerNavigation.user.name}"/>
+
+        <TextView
+            android:id="@+id/header_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@{headerNavigation.user.login}"/>
+    </LinearLayout>
+
+</layout>
