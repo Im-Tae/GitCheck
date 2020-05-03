@@ -58,7 +58,7 @@
                         android:gravity="center"
                         android:textSize="20dp"
                         style="@style/white_font_style_bold"
-                        android:visibility="@{profile.user.name == null  ? View.GONE : View.VISIBLE}"
+                        android:visibility="@{profile.user.name == null ? View.GONE : View.VISIBLE}"
                         android:text="@{profile.user.name}"/>
 
                     <TextView
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
                     style="@style/white_font_style_bold"
-                    android:visibility="@{profile.user.bio == null  ? View.GONE : View.VISIBLE}"
+                    android:visibility="@{profile.user.bio == null ? View.GONE : View.VISIBLE}"
                     android:text="@{profile.user.bio}"/>
 
                 <!--company-->
@@ -97,7 +97,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:visibility="@{profile.user.company == null  ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{profile.user.company == null ? View.GONE : View.VISIBLE}">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -122,7 +122,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:visibility="@{profile.user.location == null  ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{profile.user.location == null ? View.GONE : View.VISIBLE}">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -147,7 +147,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:visibility="@{profile.user.email == null  ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{profile.user.email == null ? View.GONE : View.VISIBLE}">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -173,7 +173,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:visibility="@{profile.user.blog == null  ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{profile.user.blog.empty ? View.GONE : View.VISIBLE}">
 
                     <ImageView
                         android:layout_width="wrap_content"
