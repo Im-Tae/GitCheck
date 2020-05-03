@@ -8,5 +8,7 @@
     <string name="logout">로그아웃</string>
     <string name="settings">환경설정</string>
     <string name="github_login">Github 로그인</string>
+    <string name="followers">팔로워 ·</string>
+    <string name="following">팔로잉</string>
 
 </resources>

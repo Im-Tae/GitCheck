@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:gravity="center"
-            android:textColor="@color/white"
+            style="@style/white_font_style_basic"
             android:text="@{headerNavigation.user.login}"/>
     </LinearLayout>
 

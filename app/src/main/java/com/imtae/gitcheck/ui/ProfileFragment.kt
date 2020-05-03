@@ -13,6 +13,7 @@ import com.imtae.gitcheck.base.BaseFragment
 import com.imtae.gitcheck.databinding.FragmentProfileBinding
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.contract.ProfileContract
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -31,6 +32,8 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
         binding.profile = this
 
+        init()
+
         return binding.root
     }
 
@@ -44,7 +47,9 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
         presenter.clearDisposable()
     }
 
-    override fun init() {}
+    override fun init() {
+        Picasso.get().load(user.avatar_url).into(binding.image)
+    }
 
     override fun hideKeyboard() {}
 
