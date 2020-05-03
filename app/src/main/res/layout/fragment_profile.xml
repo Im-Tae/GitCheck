@@ -4,6 +4,8 @@
         <variable
             name="profile"
             type="com.imtae.gitcheck.ui.ProfileFragment" />
+
+        <import type="android.view.View"/>
     </data>
 
     <LinearLayout
