@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.drawerlayout.widget.DrawerLayout
 
 import com.imtae.gitcheck.R
@@ -13,6 +12,7 @@ import com.imtae.gitcheck.base.BaseFragment
 import com.imtae.gitcheck.databinding.FragmentProfileBinding
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.contract.ProfileContract
+import com.imtae.gitcheck.utils.ProgressUtil
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
@@ -22,6 +22,7 @@ import org.koin.core.qualifier.named
 class ProfileFragment : BaseFragment(), ProfileContract.View {
 
     override val presenter: ProfileContract.Presenter by inject { parametersOf(this) }
+    private val progress : ProgressUtil by inject { parametersOf(this.context) }
     val user : User by inject(named("getUserInfo"))
 
     override lateinit var binding: FragmentProfileBinding
@@ -49,15 +50,17 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
 
     override fun init() {
         Picasso.get().load(user.avatar_url).into(binding.image)
+
+        presenter.getContribution(user.login)
     }
 
     override fun hideKeyboard() {}
 
-    override fun hideProgress() {}
+    override fun hideProgress() = progress.hide()
 
     override fun showKeyboard() {}
 
-    override fun showProgress() {}
+    override fun showProgress() = progress.show()
 
     override fun showToast(message: String) {}
 

@@ -6,5 +6,7 @@ import com.imtae.gitcheck.base.BaseView
 class ProfileContract {
     interface View : BaseView<Presenter>
 
-    interface Presenter : BasePresenter<View>
+    interface Presenter : BasePresenter<View> {
+        fun getContribution(id: String)
+    }
 }

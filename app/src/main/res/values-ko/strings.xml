@@ -10,5 +10,12 @@
     <string name="github_login">Github 로그인</string>
     <string name="followers">팔로워 ·</string>
     <string name="following">팔로잉</string>
+    <string name="sun">일</string>
+    <string name="tue">화</string>
+    <string name="mon">월</string>
+    <string name="wed">수</string>
+    <string name="thu">목</string>
+    <string name="fri">금</string>
+    <string name="sat">토</string>
 
 </resources>
