@@ -2,7 +2,7 @@ package com.imtae.gitcheck.retrofit.domain
 
 data class Contribution(
     val year: List<Year>? = null,
-    val contribution: List<Contributions>? = null
+    val contributions: List<Contributions>? = null
 )
 
 data class Year (
