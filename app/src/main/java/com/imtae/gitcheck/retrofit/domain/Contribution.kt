@@ -1,13 +1,13 @@
 package com.imtae.gitcheck.retrofit.domain
 
-data class Contribution(
-    val year: List<Year>? = null,
-    val contributions: List<Contributions>? = null
+data class Contribution (
+    val years: ArrayList<Year>? = null,
+    val contributions: ArrayList<Contributions>? = null
 )
 
 data class Year (
-    val year: String? = null,
-    val total: String? = null,
+    val year: String? = "",
+    val total: Int? = 0,
     val range: Range? = null
 )
 

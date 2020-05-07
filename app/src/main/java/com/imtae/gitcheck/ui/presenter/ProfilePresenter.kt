@@ -1,22 +1,23 @@
 package com.imtae.gitcheck.ui.presenter
 
-import android.annotation.SuppressLint
 import android.util.Log
 import com.imtae.gitcheck.retrofit.RetrofitHelper
 import com.imtae.gitcheck.retrofit.domain.Contribution
+import com.imtae.gitcheck.retrofit.domain.ContributionDTO
 import com.imtae.gitcheck.ui.contract.ProfileContract
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
-import java.text.SimpleDateFormat
-import java.util.*
+import kotlin.collections.ArrayList
 
 class ProfilePresenter(override val view: ProfileContract.View) : ProfileContract.Presenter {
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val getContribution = RetrofitHelper.getContribution()
+    private val contributionList = ArrayList<ContributionDTO>()
 
     override fun getContribution(id: String) {
 
@@ -28,15 +29,12 @@ class ProfilePresenter(override val view: ProfileContract.View) : ProfileContrac
                 .subscribeOn(Schedulers.io())
                 .subscribeWith (object : DisposableObserver<Contribution>() {
 
-                    @SuppressLint("SimpleDateFormat")
                     override fun onNext(contribution: Contribution) {
                         Log.d("contribution", contribution.toString())
 
-                        //val calendar = Calendar.getInstance().apply { time = Date() }
+                        getContributions(contribution)
 
-                        //val maxCommit = contribution.contributions?.maxBy { it.count }.toString()
-                        //val nowCommit = contribution.contributions?.indexOf(contribution.contributions.find { it.date == SimpleDateFormat("yyyy-MM-dd").format(calendar.time) }).apply { calendar.add(Calendar.YEAR, -1) }
-                        //val lastCommit = contribution.contributions?.indexOf(contribution.contributions.find { it.date == SimpleDateFormat("yyyy-MM-dd").format(calendar.time) })
+                        view.setUI(contributionList)
                     }
 
                     override fun onComplete() = view.hideProgress()
@@ -44,6 +42,31 @@ class ProfilePresenter(override val view: ProfileContract.View) : ProfileContrac
                     override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
                 } )
         )
+    }
+
+    private fun getContributions(contribution: Contribution) {
+
+        for (year in contribution.years!!) {
+            val contributionDTO = ContributionDTO()
+
+            contributionDTO.year = year.year
+            contributionDTO.total = year.total
+
+            val contributionInfoList = ArrayList<ContributionDTO.ContributionInfo>()
+
+            addDisposable(
+                Observable.range(0, contribution.contributions!!.size -1)
+                    .map { contribution.contributions[contribution.contributions.size - it - 1] }
+                    .filter { it.date!!.contains(year.year!!) }
+                    .subscribe {
+                        val contributionInfo = ContributionDTO.ContributionInfo(it.date!!, it.count, it.color!!, it.intensity)
+                        contributionInfoList.add(contributionInfo)
+                    }
+            )
+
+            contributionDTO.contributionInfoList = contributionInfoList
+            this.contributionList.add(contributionDTO)
+        }
     }
 
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }

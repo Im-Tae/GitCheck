@@ -17,5 +17,6 @@
     <string name="thu">목</string>
     <string name="fri">금</string>
     <string name="sat">토</string>
+    <string name="total">"총 커밋 : "</string>
 
 </resources>

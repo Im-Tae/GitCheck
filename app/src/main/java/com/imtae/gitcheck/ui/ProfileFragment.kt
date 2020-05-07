@@ -1,22 +1,17 @@
 package com.imtae.gitcheck.ui
 
-import android.graphics.Color
-import android.graphics.Point
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.LinearLayout
-import androidx.core.view.setMargins
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 
 import com.imtae.gitcheck.R
+import com.imtae.gitcheck.adapter.ContributionAdapter
 import com.imtae.gitcheck.base.BaseFragment
 import com.imtae.gitcheck.databinding.FragmentProfileBinding
-import com.imtae.gitcheck.retrofit.domain.Contribution
+import com.imtae.gitcheck.retrofit.domain.ContributionDTO
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.ProgressUtil
@@ -26,7 +21,6 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
-import java.time.LocalDate
 
 class ProfileFragment : BaseFragment(), ProfileContract.View {
 
@@ -61,6 +55,11 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
         Picasso.get().load(user.avatar_url).into(binding.image)
 
         presenter.getContribution(user.login)
+    }
+
+    override fun setUI(contributionDTO: ArrayList<ContributionDTO>) {
+        recyclerView.adapter?.notifyDataSetChanged()
+        recyclerView.adapter = ContributionAdapter(contributionDTO)
     }
 
     override fun hideKeyboard() {}

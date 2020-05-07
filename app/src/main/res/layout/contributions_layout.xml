@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp"
     >
@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="날짜"
-        style="@style/black_font_style_basic"/>
+        style="@style/black_font_style_basic"
+        android:layout_marginBottom="5dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
             <GridLayout
                 android:id="@+id/contribution_GridLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"
                 android:orientation="vertical"
                 android:columnCount="53"
@@ -37,5 +38,30 @@
         </HorizontalScrollView>
 
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/total"
+            style="@style/black_font_style_basic"
+            />
+
+        <TextView
+            android:id="@+id/total_commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="@string/total"
+            style="@style/black_font_style_bold"/>
+
+    </LinearLayout>
 
 </LinearLayout>
