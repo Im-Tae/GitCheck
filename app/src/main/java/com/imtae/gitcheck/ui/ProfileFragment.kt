@@ -57,9 +57,9 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
         presenter.getContribution(user.login)
     }
 
-    override fun setUI(contributionDTO: ArrayList<ContributionDTO>) {
+    override fun setUI(contributionList: ArrayList<ContributionDTO>) {
         recyclerView.adapter?.notifyDataSetChanged()
-        recyclerView.adapter = ContributionAdapter(contributionDTO)
+        recyclerView.adapter = ContributionAdapter(contributionList)
     }
 
     override fun hideKeyboard() {}

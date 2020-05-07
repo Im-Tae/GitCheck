@@ -6,7 +6,7 @@ import com.imtae.gitcheck.retrofit.domain.ContributionDTO
 
 class ProfileContract {
     interface View : BaseView<Presenter> {
-        fun setUI(contributionDTO: ArrayList<ContributionDTO>)
+        fun setUI(contributionList: ArrayList<ContributionDTO>)
     }
 
     interface Presenter : BasePresenter<View> {
