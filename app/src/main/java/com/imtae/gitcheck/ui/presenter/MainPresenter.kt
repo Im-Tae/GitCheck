@@ -1,7 +1,6 @@
 package com.imtae.gitcheck.ui.presenter
 
 import com.imtae.gitcheck.retrofit.data.Key
-import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.LoginActivity
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.PreferenceManager
@@ -18,6 +17,10 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun searchUser() {
+
+    }
+
+    override fun getUserInfo() {
 
     }
 

@@ -3,7 +3,6 @@ package com.imtae.gitcheck.ui.contract
 import com.google.android.material.navigation.NavigationView
 import com.imtae.gitcheck.base.BasePresenter
 import com.imtae.gitcheck.base.BaseView
-import com.imtae.gitcheck.retrofit.domain.User
 
 class MainContract {
 
@@ -16,5 +15,7 @@ class MainContract {
         fun searchUser()
 
         fun logout()
+
+        fun getUserInfo()
     }
 }
