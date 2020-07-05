@@ -11,3 +11,7 @@ jobs:
       - checkout
       - run:
           command: ./gradlew build
+
+dependencies:
+    override:
+        - chmod +x gradlew
