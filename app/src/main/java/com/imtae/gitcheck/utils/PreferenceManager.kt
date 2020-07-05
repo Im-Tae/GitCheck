@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder
 import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.User
 
+
 class PreferenceManager(context : Context) {
 
     private val pref = PreferenceManager.getDefaultSharedPreferences(context)

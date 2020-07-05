@@ -3,13 +3,11 @@
 
     <item
         android:id="@+id/nav_settings"
-        android:icon="@mipmap/ic_launcher_round"
         android:title="@string/settings"
         />
 
     <item
         android:id="@+id/nav_logout"
-        android:icon="@mipmap/ic_launcher_round"
         android:title="@string/logout"
         />
 
