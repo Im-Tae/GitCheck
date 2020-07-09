@@ -1,6 +1,7 @@
 package com.imtae.gitcheck.ui.presenter
 
 import android.util.Log
+import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.di.app.MyApplication
 import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.RetrofitHelper
@@ -33,9 +34,9 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
             .addPathSegment("login")
             .addPathSegment("oauth")
             .addPathSegment("authorize")
-            .addQueryParameter("client_id", MyApplication.CLIENT_ID)
+            .addQueryParameter("client_id", BuildConfig.CLIENT_ID)
             .addQueryParameter("scope", "user:email")
-            .addQueryParameter("redirect_uri", MyApplication.redirect_uri)
+            .addQueryParameter("redirect_uri", BuildConfig.REDIRECT_URI)
             .build()
 
         view.showGithubWebView(httpUrl.toString())
@@ -44,7 +45,7 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
     override fun getGithubToken(code: String, state: String) {
 
         addDisposable(
-            getToken.getAccessToken(MyApplication.CLIENT_ID, MyApplication.CLIENT_SECRET, code, MyApplication.redirect_uri, state)
+            getToken.getAccessToken(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET, code, BuildConfig.REDIRECT_URI, state)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith (object : DisposableObserver<AccessToken>() {

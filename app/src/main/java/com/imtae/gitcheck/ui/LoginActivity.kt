@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.di.app.MyApplication
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
@@ -29,7 +30,7 @@ class LoginActivity : BaseActivity(), LoginContract.View {
 
         val uri = intent.data
 
-        if (uri != null && uri.toString().startsWith(MyApplication.redirect_uri)) {
+        if (uri != null && uri.toString().startsWith(BuildConfig.REDIRECT_URI)) {
             val code = uri.getQueryParameter("code")
             val state = uri.getQueryParameter("state")
 

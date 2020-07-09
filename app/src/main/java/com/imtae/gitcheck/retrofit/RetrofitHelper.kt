@@ -1,5 +1,6 @@
 package com.imtae.gitcheck.retrofit
 
+import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.di.app.MyApplication
 import com.imtae.gitcheck.retrofit.network.ContributionApi
 import com.imtae.gitcheck.retrofit.network.TokenApi
@@ -25,7 +26,7 @@ class RetrofitHelper {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
-                .baseUrl(MyApplication.BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .build()
 
             return retrofit.create(TokenApi::class.java)
@@ -36,7 +37,7 @@ class RetrofitHelper {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
-                .baseUrl(MyApplication.API_URL)
+                .baseUrl(BuildConfig.API_URL)
                 .build()
 
             return retrofit.create(UserApi::class.java)
@@ -47,7 +48,7 @@ class RetrofitHelper {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
-                .baseUrl(MyApplication.CONTIRBUTION_URL)
+                .baseUrl(BuildConfig.CONTRIBUTION_URL)
                 .build()
 
             return retrofit.create(ContributionApi::class.java)
