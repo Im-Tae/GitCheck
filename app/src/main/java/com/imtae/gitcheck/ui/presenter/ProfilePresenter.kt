@@ -1,9 +1,9 @@
 package com.imtae.gitcheck.ui.presenter
 
 import android.util.Log
-import com.imtae.gitcheck.retrofit.RetrofitHelper
 import com.imtae.gitcheck.retrofit.domain.Contribution
 import com.imtae.gitcheck.retrofit.domain.ContributionDTO
+import com.imtae.gitcheck.retrofit.network.ContributionApi
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,12 +11,15 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import org.koin.core.qualifier.named
 import kotlin.collections.ArrayList
 
-class ProfilePresenter(override val view: ProfileContract.View) : ProfileContract.Presenter {
+class ProfilePresenter(override val view: ProfileContract.View) : ProfileContract.Presenter, KoinComponent {
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private val getContribution = RetrofitHelper.getContribution()
+    private val getContribution : ContributionApi by inject(named("ContributionApi"))
     private val contributionList = ArrayList<ContributionDTO>()
 
     override fun getContribution(id: String) {

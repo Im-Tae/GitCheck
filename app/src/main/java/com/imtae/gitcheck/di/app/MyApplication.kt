@@ -4,6 +4,7 @@ import android.app.Application
 import com.imtae.gitcheck.di.modules.activityModule
 import com.imtae.gitcheck.di.modules.appModule
 import com.imtae.gitcheck.di.modules.fragmentModule
+import com.imtae.gitcheck.di.modules.networkModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -16,7 +17,8 @@ class MyApplication : Application() {
             modules(
                 appModule,
                 activityModule,
-                fragmentModule
+                fragmentModule,
+                networkModule
             )
         }
     }
