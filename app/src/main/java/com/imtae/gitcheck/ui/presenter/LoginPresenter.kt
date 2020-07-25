@@ -4,9 +4,10 @@ import android.util.Log
 import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.di.app.MyApplication
 import com.imtae.gitcheck.retrofit.data.Key
-import com.imtae.gitcheck.retrofit.RetrofitHelper
 import com.imtae.gitcheck.retrofit.domain.AccessToken
 import com.imtae.gitcheck.retrofit.domain.User
+import com.imtae.gitcheck.retrofit.network.TokenApi
+import com.imtae.gitcheck.retrofit.network.UserApi
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.LoginContract
 import com.imtae.gitcheck.utils.PreferenceManager
@@ -19,13 +20,14 @@ import okhttp3.HttpUrl
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.named
 
 class LoginPresenter(override val view: LoginContract.View) : LoginContract.Presenter, KoinComponent {
 
     private val pref : PreferenceManager by inject { parametersOf(this) }
 
-    private val getToken = RetrofitHelper.getToken()
-    private val getUserInfo = RetrofitHelper.getUserInfo()
+    private val getToken : TokenApi by inject(named("TokenApi"))
+    private val getUserInfo : UserApi by inject(named("UserApi"))
 
     override fun loginGithub() {
         val httpUrl = HttpUrl.Builder()
