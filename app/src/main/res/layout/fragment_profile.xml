@@ -252,7 +252,8 @@
             android:layout_height="match_parent"
             android:id="@+id/recyclerView"
             tools:listitem="@layout/contributions_layout"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:overScrollMode="never"/>
 
     </LinearLayout>
 

@@ -3,6 +3,8 @@ package com.imtae.gitcheck
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.imtae.gitcheck.di.modules.activityModule
 import com.imtae.gitcheck.di.modules.appModule
+import com.imtae.gitcheck.di.modules.fragmentModule
+import com.imtae.gitcheck.di.modules.networkModule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.context.startKoin
@@ -16,7 +18,9 @@ class ModulesTest {
             printLogger(Level.DEBUG)
             modules(
                 appModule,
-                activityModule
+                activityModule,
+                fragmentModule,
+                networkModule
             )
         }
     }
