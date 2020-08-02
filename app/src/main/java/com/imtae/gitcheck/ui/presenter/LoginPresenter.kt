@@ -52,7 +52,7 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
                 .subscribeWith (object : DisposableObserver<AccessToken>() {
                     override fun onNext(accessToken: AccessToken) {
                         pref.setData(Key.Access_Token.toString(), accessToken.accessToken)
-                        getUserName("token ${accessToken.accessToken}")
+                        getUserInfo("token ${accessToken.accessToken}")
                     }
 
                     override fun onComplete() {}
@@ -62,7 +62,7 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
         )
     }
 
-    private fun getUserName(token: String) {
+    private fun getUserInfo(token: String) {
         addDisposable(
             getUserInfo.getUserInfo(token)
                 .observeOn(AndroidSchedulers.mainThread())

@@ -8,5 +8,4 @@ import retrofit2.http.Header
 interface UserApi {
     @GET("user")
     fun getUserInfo( @Header("Authorization") token: String ): Observable<User>
-
 }
