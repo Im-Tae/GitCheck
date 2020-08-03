@@ -78,29 +78,3 @@
 #
 #
 -dontwarn com.squareup.okhttp.**
-
-# koin
-#
-#
--keepnames class android.arch.lifecycle.ViewModel
--keepclassmembers public class * extends android.arch.lifecycle.ViewModel { public <init>(...); }
--keepclassmembers class com.lebao.app.domain.** { public <init>(...); }
--keepclassmembers class * { public <init>(...); }
-
-# recyclerview
-#
-#
--keep public class * extends androidx.recyclerview.widget.RecyclerView$LayoutManager {
-    public <init>(android.content.Context, android.util.AttributeSet, int, int);
-    public <init>();
-}
--keepclassmembers class androidx.recyclerview.widget.RecyclerView {
-    public void suppressLayout(boolean);
-    public boolean isLayoutSuppressed();
-}
-
-# AVLoadingIndicatorView Proguard
-#
-#
--keep class com.wang.avi.** { *; }
--keep class com.wang.avi.indicators.** { *; }
