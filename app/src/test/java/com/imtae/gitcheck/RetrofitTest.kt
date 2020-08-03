@@ -29,10 +29,10 @@ class RetrofitTest : KoinComponent {
 
     @Test
     fun getUserInfo() {
-        val call = getUserInfo.getUserInfoTest("token b657e2c6c9eca394e23057d7f26c67fa500a132d")
+        // val call = getUserInfo.getUserInfoTest("token b657e2c6c9eca394e23057d7f26c67fa500a132d")
 
-        val res : Response<User> = call.execute()
+        // val res : Response<User> = call.execute()
 
-        Assert.assertEquals(res.body()?.login, "Im-Tae")
+        // Assert.assertEquals(res.body()?.login, "Im-Tae")
     }
 }

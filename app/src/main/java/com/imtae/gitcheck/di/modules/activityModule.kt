@@ -1,5 +1,6 @@
 package com.imtae.gitcheck.di.modules
 
+import com.imtae.gitcheck.retrofit.repository.UserRepository
 import com.imtae.gitcheck.ui.contract.LoginContract
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.ui.contract.SplashContract
@@ -10,12 +11,14 @@ import org.koin.dsl.module
 
 val activityModule = module {
 
+    factory { UserRepository() }
+
     factory<SplashContract.Presenter> {
         (view: SplashContract.View) -> SplashPresenter(view)
     }
 
     factory<LoginContract.Presenter> {
-        (view : LoginContract.View) -> LoginPresenter(view)
+        (view : LoginContract.View) -> LoginPresenter(view, get())
     }
 
     factory<MainContract.Presenter> {

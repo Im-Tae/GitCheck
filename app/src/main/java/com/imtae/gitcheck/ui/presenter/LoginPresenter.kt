@@ -7,6 +7,7 @@ import com.imtae.gitcheck.retrofit.domain.AccessToken
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.retrofit.network.TokenApi
 import com.imtae.gitcheck.retrofit.network.UserApi
+import com.imtae.gitcheck.retrofit.repository.UserRepository
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.LoginContract
 import com.imtae.gitcheck.utils.PreferenceManager
@@ -21,7 +22,7 @@ import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
-class LoginPresenter(override val view: LoginContract.View) : LoginContract.Presenter, KoinComponent {
+class LoginPresenter(override val view: LoginContract.View, private val user: UserRepository) : LoginContract.Presenter, KoinComponent {
 
     private val pref : PreferenceManager by inject { parametersOf(this) }
 
@@ -51,8 +52,8 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
                 .subscribeOn(Schedulers.io())
                 .subscribeWith (object : DisposableObserver<AccessToken>() {
                     override fun onNext(accessToken: AccessToken) {
-                        pref.setData(Key.Access_Token.toString(), accessToken.accessToken)
-                        getUserInfo("token ${accessToken.accessToken}")
+                        pref.setData(Key.Access_Token.toString(), " token ${accessToken.accessToken}")
+                        getUserInfo()
                     }
 
                     override fun onComplete() {}
@@ -62,21 +63,14 @@ class LoginPresenter(override val view: LoginContract.View) : LoginContract.Pres
         )
     }
 
-    private fun getUserInfo(token: String) {
+    private fun getUserInfo() {
         addDisposable(
-            getUserInfo.getUserInfo(token)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribeWith(object : DisposableObserver<User>() {
-                    override fun onNext(user: User) {
-                        Log.d("userInfo", user.toString())
-                        pref.setUserInfo(Key.User_Info.toString(), user)
-                    }
-
-                    override fun onComplete() = view.startActivity(MainActivity::class.java)
-
-                    override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
-                })
+            user.getUserInfo()
+                .subscribe(
+                    { pref.setUserInfo(Key.User_Info.toString(), it) },
+                    { Log.d("error", it.message.toString()) },
+                    { view.startActivity(MainActivity::class.java) }
+                )
         )
     }
 
