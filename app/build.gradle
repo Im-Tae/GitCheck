@@ -53,7 +53,6 @@ android {
     lintOptions {
         abortOnError false
     }
-
 }
 
 dependencies {
@@ -98,7 +97,6 @@ dependencies {
     implementation "org.koin:koin-androidx-fragment:$koin_version"
 
     // mockito
-    testImplementation "org.mockito:mockito-core:3.3.3"
     testImplementation 'org.mockito:mockito-inline:2.28.2'
 
     // Espresso

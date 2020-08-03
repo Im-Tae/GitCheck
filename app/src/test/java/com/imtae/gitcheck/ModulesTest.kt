@@ -4,8 +4,9 @@ import com.imtae.gitcheck.di.modules.activityModule
 import com.imtae.gitcheck.di.modules.appModule
 import com.imtae.gitcheck.di.modules.fragmentModule
 import com.imtae.gitcheck.di.modules.networkModule
-import org.junit.Test
+import org.junit.*
 import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.core.logger.Level
 
 class ModulesTest {
@@ -21,5 +22,10 @@ class ModulesTest {
                 networkModule
             )
         }
+    }
+
+    @After
+    fun clean() {
+        stopKoin()
     }
 }
