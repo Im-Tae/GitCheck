@@ -12,6 +12,7 @@ import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityMainBinding
 import com.imtae.gitcheck.databinding.NavigationHeaderBinding
 import com.imtae.gitcheck.retrofit.domain.User
+import com.imtae.gitcheck.rx.RxBus
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.KeyboardUtil
 import com.imtae.gitcheck.utils.ProgressUtil
@@ -20,14 +21,17 @@ import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import org.koin.android.ext.android.inject
+import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
-import org.koin.core.qualifier.named
 
 class MainActivity : BaseActivity(), MainContract.View {
 
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
     private val progress : ProgressUtil by inject { parametersOf(this) }
-    val user : User by inject(named("getUserInfo"))
+
+    private val rxBus : RxBus by inject()
+
+    var userInfo : User = presenter.getUserInfo()
 
     override lateinit var binding: ActivityMainBinding
     private lateinit var bindingNavigationHeader : NavigationHeaderBinding
@@ -50,7 +54,14 @@ class MainActivity : BaseActivity(), MainContract.View {
     }
 
     override fun init() {
-        Picasso.get().load(user.avatar_url).into(bindingNavigationHeader.headerImage)
+
+        presenter.addDisposable(
+            rxBus.listen(User::class.java).subscribe {
+                userInfo = it
+            }
+        )
+
+        Picasso.get().load(userInfo.avatar_url).into(bindingNavigationHeader.headerImage)
 
         navigation_view.setNavigationItemSelectedListener(this)
         show_navigation_bar_button.setOnClickListener(this)

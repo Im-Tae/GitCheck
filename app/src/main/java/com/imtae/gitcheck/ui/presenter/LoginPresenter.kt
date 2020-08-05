@@ -3,16 +3,16 @@ package com.imtae.gitcheck.ui.presenter
 import android.util.Log
 import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.retrofit.data.Key
-import com.imtae.gitcheck.retrofit.domain.AccessToken
+import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.retrofit.network.TokenApi
 import com.imtae.gitcheck.retrofit.repository.UserRepository
+import com.imtae.gitcheck.rx.RxBus
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.LoginContract
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import okhttp3.HttpUrl
 import org.koin.core.KoinComponent
@@ -25,6 +25,8 @@ class LoginPresenter(override val view: LoginContract.View, private val user: Us
     private val pref : PreferenceManager by inject { parametersOf(this) }
 
     private val getToken : TokenApi by inject(named("TokenApi"))
+
+    private val rxBus : RxBus by inject()
 
     override fun loginGithub() {
         val httpUrl = HttpUrl.Builder()
@@ -63,6 +65,7 @@ class LoginPresenter(override val view: LoginContract.View, private val user: Us
                 .subscribe(
                     {
                         pref.setUserInfo(Key.User_Info.toString(), it).apply {
+                            rxBus.publish(it)
                             view.startActivity(MainActivity::class.java)
                         }
                     },

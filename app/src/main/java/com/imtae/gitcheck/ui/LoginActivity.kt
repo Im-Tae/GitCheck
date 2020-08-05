@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.imtae.gitcheck.BuildConfig
-import com.imtae.gitcheck.di.app.MyApplication
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityLoginBinding
@@ -61,6 +60,4 @@ class LoginActivity : BaseActivity(), LoginContract.View {
         startActivity(Intent(this, activityName))
         finish()
     }
-
-
 }
