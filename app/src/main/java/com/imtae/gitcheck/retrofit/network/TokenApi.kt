@@ -1,7 +1,7 @@
 package com.imtae.gitcheck.retrofit.network
 
 import com.imtae.gitcheck.retrofit.domain.AccessToken
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.Headers
@@ -18,5 +18,5 @@ interface TokenApi {
         @Field("code") code :String,
         @Field("redirect_uri") redirectUri : String,
         @Field("state") state : String
-    ) : Observable<AccessToken>
+    ) : Single<AccessToken>
 }

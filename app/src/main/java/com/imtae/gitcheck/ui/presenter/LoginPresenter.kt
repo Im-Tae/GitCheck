@@ -4,9 +4,7 @@ import android.util.Log
 import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.AccessToken
-import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.retrofit.network.TokenApi
-import com.imtae.gitcheck.retrofit.network.UserApi
 import com.imtae.gitcheck.retrofit.repository.UserRepository
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.LoginContract
@@ -27,7 +25,6 @@ class LoginPresenter(override val view: LoginContract.View, private val user: Us
     private val pref : PreferenceManager by inject { parametersOf(this) }
 
     private val getToken : TokenApi by inject(named("TokenApi"))
-    private val getUserInfo : UserApi by inject(named("UserApi"))
 
     override fun loginGithub() {
         val httpUrl = HttpUrl.Builder()
@@ -50,26 +47,26 @@ class LoginPresenter(override val view: LoginContract.View, private val user: Us
             getToken.getAccessToken(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET, code, BuildConfig.REDIRECT_URI, state)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribeWith (object : DisposableObserver<AccessToken>() {
-                    override fun onNext(accessToken: AccessToken) {
-                        pref.setData(Key.Access_Token.toString(), " token ${accessToken.accessToken}")
-                        getUserInfo()
-                    }
-
-                    override fun onComplete() {}
-
-                    override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
-                } )
+                .subscribe(
+                    {
+                        pref.setData(Key.Access_Token.toString(), "token ${it.accessToken}")
+                        getUserInfo("token ${it.accessToken}")
+                    },
+                    { Log.d("error", it.message.toString()) }
+                )
         )
     }
 
-    private fun getUserInfo() {
+    private fun getUserInfo(token: String) {
         addDisposable(
-            user.getUserInfo()
+            user.getUserInfo(token)
                 .subscribe(
-                    { pref.setUserInfo(Key.User_Info.toString(), it) },
-                    { Log.d("error", it.message.toString()) },
-                    { view.startActivity(MainActivity::class.java) }
+                    {
+                        pref.setUserInfo(Key.User_Info.toString(), it).apply {
+                            view.startActivity(MainActivity::class.java)
+                        }
+                    },
+                    { Log.d("error", it.message.toString()) }
                 )
         )
     }

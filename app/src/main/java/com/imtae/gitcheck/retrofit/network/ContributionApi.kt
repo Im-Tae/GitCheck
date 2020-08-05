@@ -1,11 +1,11 @@
 package com.imtae.gitcheck.retrofit.network
 
 import com.imtae.gitcheck.retrofit.domain.Contribution
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ContributionApi {
     @GET("{userId}")
-    fun getContributions(@Path("userId") userId: String): Observable<Contribution>
+    fun getContributions(@Path("userId") userId: String): Single<Contribution>
 }

@@ -30,20 +30,19 @@ class ProfilePresenter(override val view: ProfileContract.View) : ProfileContrac
             getContribution.getContributions(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribeWith (object : DisposableObserver<Contribution>() {
+                .subscribe(
+                    {
+                        Log.d("contribution", it.toString())
 
-                    override fun onNext(contribution: Contribution) {
-                        Log.d("contribution", contribution.toString())
+                        getContributions(it)
 
-                        getContributions(contribution)
-
-                        view.setUI(contributionList)
-                    }
-
-                    override fun onComplete() = view.hideProgress()
-
-                    override fun onError(e: Throwable) { Log.d("error", e.message.toString()) }
-                } )
+                        view.apply {
+                            setUI(contributionList)
+                            hideProgress()
+                        }
+                    },
+                    { Log.d("error", it.message.toString()) }
+                )
         )
     }
 
@@ -58,7 +57,7 @@ class ProfilePresenter(override val view: ProfileContract.View) : ProfileContrac
             val contributionInfoList = ArrayList<ContributionDTO.ContributionInfo>()
 
             addDisposable(
-                Observable.range(0, contribution.contributions!!.size -1)
+                Observable.range(0, contribution.contributions!!.size - 1)
                     .map { contribution.contributions[contribution.contributions.size - it - 1] }
                     .filter { it.date!!.contains(year.year!!) }
                     .subscribe {
