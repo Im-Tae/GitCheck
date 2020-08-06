@@ -21,7 +21,7 @@ data class User(
     val site_admin: Boolean = false,
     val name: String? = null,
     val company: String? = null,
-    val blog: String = "",
+    val blog: String? = null,
     val location: String? = null,
     val email: String? = null,
     val hireable: Any? = null,
