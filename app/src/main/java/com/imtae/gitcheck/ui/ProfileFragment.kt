@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.adapter.ContributionAdapter
@@ -20,29 +22,26 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
-import org.koin.core.qualifier.named
 
 class ProfileFragment : BaseFragment(), ProfileContract.View {
 
     override val presenter: ProfileContract.Presenter by inject { parametersOf(this) }
     private val progress : ProgressUtil by inject { parametersOf(this.context) }
-    val user : User by inject(named("getUserInfo"))
 
     override lateinit var binding: FragmentProfileBinding
+
+    var user = MutableLiveData<User>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         activity?.drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
+        binding.lifecycleOwner = this
         binding.profile = this
 
         init()
 
         return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
     }
 
     override fun onDestroy() {
@@ -52,14 +51,22 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
     }
 
     override fun init() {
-        Picasso.get().load(user.avatar_url).into(binding.image)
 
-        presenter.getContribution(user.login)
+        presenter.getUserInfo()
+
+        presenter.userInfo.observe(viewLifecycleOwner, Observer {
+            user.postValue(it)
+        })
     }
 
     override fun setUI(contributionList: ArrayList<ContributionDTO>) {
         recyclerView.adapter?.notifyDataSetChanged()
         recyclerView.adapter = ContributionAdapter(contributionList)
+    }
+
+    override fun setUserProfile(userInfo: User) {
+        Picasso.get().load(userInfo.avatar_url).into(binding.image)
+        presenter.getContribution(userInfo.login)
     }
 
     override fun hideKeyboard() {}

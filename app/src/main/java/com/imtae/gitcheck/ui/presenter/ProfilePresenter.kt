@@ -1,10 +1,16 @@
 package com.imtae.gitcheck.ui.presenter
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.Contribution
 import com.imtae.gitcheck.retrofit.domain.ContributionDTO
+import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.retrofit.network.ContributionApi
+import com.imtae.gitcheck.retrofit.repository.UserRepository
+import com.imtae.gitcheck.rx.RxBus
 import com.imtae.gitcheck.ui.contract.ProfileContract
+import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -12,14 +18,23 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 import kotlin.collections.ArrayList
 
-class ProfilePresenter(override val view: ProfileContract.View) : ProfileContract.Presenter, KoinComponent {
+class ProfilePresenter(override val view: ProfileContract.View, private val user: UserRepository) : ProfileContract.Presenter, KoinComponent {
+
+    private val getContribution : ContributionApi by inject(named("ContributionApi"))
+
+    private val rxBus : RxBus by inject()
+
+    private val pref : PreferenceManager by inject { parametersOf(this) }
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private val getContribution : ContributionApi by inject(named("ContributionApi"))
+
     private val contributionList = ArrayList<ContributionDTO>()
+
+    override var userInfo = MutableLiveData<User>()
 
     override fun getContribution(id: String) {
 
@@ -68,6 +83,25 @@ class ProfilePresenter(override val view: ProfileContract.View) : ProfileContrac
             contributionDTO.contributionInfoList = contributionInfoList
             this.contributionList.add(contributionDTO)
         }
+    }
+
+    override fun getUserInfo() {
+
+        val token = pref.getData(Key.Access_Token.toString())!!
+
+        addDisposable(
+            user.getUserInfo(token)
+                .subscribe(
+                    {
+                        pref.setUserInfo(Key.User_Info.toString(), it).apply {
+                            rxBus.publish(it)
+                            userInfo.value = it
+                            view.setUserProfile(it)
+                        }
+                    },
+                    { Log.d("error", it.message.toString()) }
+                )
+        )
     }
 
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }

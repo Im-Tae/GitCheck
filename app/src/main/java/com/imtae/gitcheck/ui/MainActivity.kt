@@ -29,8 +29,6 @@ class MainActivity : BaseActivity(), MainContract.View {
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
     private val progress : ProgressUtil by inject { parametersOf(this) }
 
-    private val rxBus : RxBus by inject()
-
     var userInfo : User = presenter.getUserInfo()
 
     override lateinit var binding: ActivityMainBinding
@@ -55,11 +53,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override fun init() {
 
-        presenter.addDisposable(
-            rxBus.listen(User::class.java).subscribe {
-                userInfo = it
-            }
-        )
+        presenter.updateUserInfo()
 
         Picasso.get().load(userInfo.avatar_url).into(bindingNavigationHeader.headerImage)
 
@@ -133,6 +127,8 @@ class MainActivity : BaseActivity(), MainContract.View {
         show_navigation_bar_button.visibility = View.INVISIBLE
         search_button.visibility = View.GONE
     }
+
+    override fun setUser(user: User) { userInfo = user }
 
     override fun startActivity(activityName: Class<*>) = startActivity(Intent(this, activityName))
 

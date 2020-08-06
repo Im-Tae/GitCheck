@@ -10,6 +10,8 @@ class MainContract {
     interface View : BaseView<Presenter>, NavigationView.OnNavigationItemSelectedListener, android.view.View.OnClickListener {
 
         fun hideNavigationDrawer()
+
+        fun setUser(user: User)
     }
 
     interface Presenter : BasePresenter<View> {
@@ -18,5 +20,7 @@ class MainContract {
         fun logout()
 
         fun getUserInfo(): User
+
+        fun updateUserInfo()
     }
 }

@@ -21,4 +21,6 @@ val appModule = module {
     single { NetworkUtil(androidContext()) }
 
     single { RxBus }
+
+    factory { UserRepository() }
 }
