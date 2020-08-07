@@ -41,8 +41,7 @@
                     android:id="@+id/image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_person_black_24dp"/>
+                    android:layout_gravity="center"/>
 
                 <!--name&nickname-->
                 <LinearLayout
