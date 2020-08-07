@@ -1,5 +1,6 @@
 package com.imtae.gitcheck.ui.contract
 
+import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.imtae.gitcheck.base.BasePresenter
 import com.imtae.gitcheck.base.BaseView
@@ -12,10 +13,13 @@ class MainContract {
         fun hideNavigationDrawer()
 
         fun setUser(user: User)
+
+        fun showFragment(fragment: Fragment)
     }
 
     interface Presenter : BasePresenter<View> {
-        fun searchUser()
+
+        fun searchUser(name: String)
 
         fun logout()
 

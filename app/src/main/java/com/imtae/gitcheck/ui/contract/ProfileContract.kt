@@ -8,6 +8,7 @@ import com.imtae.gitcheck.retrofit.domain.User
 
 class ProfileContract {
     interface View : BaseView<Presenter> {
+
         fun setUI(contributionList: ArrayList<ContributionDTO>)
 
         fun setUserProfile(userInfo: User)

@@ -52,7 +52,10 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
 
     override fun init() {
 
-        presenter.getUserInfo()
+        if (arguments?.getString("name") != null)
+            presenter.getContribution(arguments?.getString("name")!!)
+        else
+            presenter.getUserInfo()
 
         presenter.userInfo.observe(viewLifecycleOwner, Observer {
             user.postValue(it)

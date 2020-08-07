@@ -1,9 +1,11 @@
 package com.imtae.gitcheck.ui.presenter
 
+import android.os.Bundle
 import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.rx.RxBus
 import com.imtae.gitcheck.ui.LoginActivity
+import com.imtae.gitcheck.ui.ProfileFragment
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.disposables.CompositeDisposable
@@ -24,8 +26,16 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    override fun searchUser() {
+    override fun searchUser(name: String) {
 
+        val bundle = Bundle()
+        bundle.putString("name", name)
+
+        val profileFragment = ProfileFragment()
+        profileFragment.arguments = bundle
+
+        view.showFragment(profileFragment)
+        view.hideKeyboard()
     }
 
     override fun getUserInfo(): User = user

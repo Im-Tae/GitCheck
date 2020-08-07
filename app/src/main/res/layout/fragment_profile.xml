@@ -21,6 +21,7 @@
         android:focusable="true">
 
         <LinearLayout
+            android:id="@+id/userInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"

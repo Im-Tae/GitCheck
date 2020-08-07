@@ -2,17 +2,20 @@ package com.imtae.gitcheck.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityMainBinding
 import com.imtae.gitcheck.databinding.NavigationHeaderBinding
 import com.imtae.gitcheck.retrofit.domain.User
-import com.imtae.gitcheck.rx.RxBus
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.KeyboardUtil
 import com.imtae.gitcheck.utils.ProgressUtil
@@ -21,7 +24,6 @@ import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import org.koin.android.ext.android.inject
-import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 
 class MainActivity : BaseActivity(), MainContract.View {
@@ -63,6 +65,30 @@ class MainActivity : BaseActivity(), MainContract.View {
         back_button.setOnClickListener(this)
 
         bindingNavigationHeader.headerLayout.setOnClickListener(this)
+
+        search_bar.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    presenter.addDisposable(
+                        Observable.just(hideNavigationDrawer())
+                            .subscribe {
+                                presenter.searchUser(search_bar.text.toString())
+                            }
+                    )
+                    return true
+                }
+                return false
+            }
+        })
+    }
+
+    override fun showFragment(fragment: Fragment) {
+
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.slide_up,0,0, R.anim.slide_down)
+            .add(R.id.drawer_layout, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onClick(view: View) {
@@ -89,11 +115,7 @@ class MainActivity : BaseActivity(), MainContract.View {
                 presenter.addDisposable(
                     Observable.just(hideNavigationDrawer())
                         .subscribe {
-                            supportFragmentManager.beginTransaction()
-                                .setCustomAnimations(R.anim.slide_up,0,0, R.anim.slide_down)
-                                .add(R.id.drawer_layout, ProfileFragment())
-                                .addToBackStack(null)
-                                .commit()
+                            showFragment(ProfileFragment())
                         }
                 )
         }
