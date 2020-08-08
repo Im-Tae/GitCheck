@@ -70,7 +70,7 @@ class MainActivity : BaseActivity(), MainContract.View {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     presenter.addDisposable(
-                        Observable.just(hideNavigationDrawer())
+                        Observable.just(hideKeyboard())
                             .subscribe {
                                 presenter.searchUser(search_bar.text.toString())
                             }

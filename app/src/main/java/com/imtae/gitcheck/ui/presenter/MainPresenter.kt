@@ -35,7 +35,6 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
         profileFragment.arguments = bundle
 
         view.showFragment(profileFragment)
-        view.hideKeyboard()
     }
 
     override fun getUserInfo(): User = user

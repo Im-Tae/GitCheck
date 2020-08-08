@@ -44,6 +44,17 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (arguments?.getString("name") != null) {
+            userInfoLayout.visibility = View.GONE
+            presenter.getContribution(arguments?.getString("name")!!)
+        }
+        else
+            presenter.getUserInfo()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         activity?.drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
@@ -51,11 +62,6 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
     }
 
     override fun init() {
-
-        if (arguments?.getString("name") != null)
-            presenter.getContribution(arguments?.getString("name")!!)
-        else
-            presenter.getUserInfo()
 
         presenter.userInfo.observe(viewLifecycleOwner, Observer {
             user.postValue(it)
@@ -83,5 +89,4 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
     override fun showToast(message: String) {}
 
     override fun startActivity(activityName: Class<*>) {}
-
 }
