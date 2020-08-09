@@ -3,14 +3,13 @@ package com.imtae.gitcheck.ui.presenter
 import android.os.Bundle
 import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.User
-import com.imtae.gitcheck.rx.RxBus
+import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.LoginActivity
 import com.imtae.gitcheck.ui.ProfileFragment
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import org.koin.android.ext.android.inject
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf

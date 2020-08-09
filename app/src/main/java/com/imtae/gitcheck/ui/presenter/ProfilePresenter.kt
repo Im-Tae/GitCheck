@@ -8,7 +8,7 @@ import com.imtae.gitcheck.retrofit.domain.ContributionDTO
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.retrofit.network.ContributionApi
 import com.imtae.gitcheck.retrofit.repository.UserRepository
-import com.imtae.gitcheck.rx.RxBus
+import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.Observable

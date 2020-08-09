@@ -3,7 +3,7 @@ package com.imtae.gitcheck.di.modules
 import android.content.Context
 import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.repository.UserRepository
-import com.imtae.gitcheck.rx.RxBus
+import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.utils.NetworkUtil
 import com.imtae.gitcheck.utils.PreferenceManager
 import com.imtae.gitcheck.utils.ProgressUtil

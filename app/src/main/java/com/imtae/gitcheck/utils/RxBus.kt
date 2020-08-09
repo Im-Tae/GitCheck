@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.rx
+package com.imtae.gitcheck.utils
 
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject

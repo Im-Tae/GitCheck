@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
 import com.imtae.gitcheck.R
-import com.imtae.gitcheck.adapter.ContributionAdapter
+import com.imtae.gitcheck.ui.adapter.ContributionAdapter
 import com.imtae.gitcheck.base.BaseFragment
 import com.imtae.gitcheck.databinding.FragmentProfileBinding
 import com.imtae.gitcheck.retrofit.domain.ContributionDTO
