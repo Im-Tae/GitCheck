@@ -1,10 +1,7 @@
 package com.imtae.gitcheck.di.app
 
 import android.app.Application
-import com.imtae.gitcheck.di.modules.activityModule
-import com.imtae.gitcheck.di.modules.appModule
-import com.imtae.gitcheck.di.modules.fragmentModule
-import com.imtae.gitcheck.di.modules.networkModule
+import com.imtae.gitcheck.di.modules.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -18,7 +15,8 @@ class MyApplication : Application() {
                 appModule,
                 activityModule,
                 fragmentModule,
-                networkModule
+                networkModule,
+                repositoryModule
             )
         }
     }
