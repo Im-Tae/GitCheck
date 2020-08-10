@@ -49,7 +49,7 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
 
         if (arguments?.getString("name") != null) {
             userInfoLayout.visibility = View.GONE
-            presenter.getContribution(arguments?.getString("name")!!)
+            presenter.getContributions(arguments?.getString("name")!!)
         }
         else
             presenter.getUserInfo()
@@ -75,7 +75,7 @@ class ProfileFragment : BaseFragment(), ProfileContract.View {
 
     override fun setUserProfile(userInfo: User) {
         Picasso.get().load(userInfo.avatar_url).into(binding.image)
-        presenter.getContribution(userInfo.login)
+        presenter.getContributions(userInfo.login)
     }
 
     override fun hideKeyboard() {}

@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val fragmentModule = module {
     factory<ProfileContract.Presenter> {
-        (view: ProfileContract.View) -> ProfilePresenter(view, get())
+        (view: ProfileContract.View) -> ProfilePresenter(view, get(), get())
     }
 }

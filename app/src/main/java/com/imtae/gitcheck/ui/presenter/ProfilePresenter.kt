@@ -6,25 +6,20 @@ import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.Contribution
 import com.imtae.gitcheck.retrofit.domain.ContributionDTO
 import com.imtae.gitcheck.retrofit.domain.User
-import com.imtae.gitcheck.retrofit.network.ContributionApi
+import com.imtae.gitcheck.retrofit.repository.ContributionRepository
 import com.imtae.gitcheck.retrofit.repository.UserRepository
 import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
-import org.koin.core.qualifier.named
 import kotlin.collections.ArrayList
 
-class ProfilePresenter(override val view: ProfileContract.View, private val user: UserRepository) : ProfileContract.Presenter, KoinComponent {
-
-    private val getContribution : ContributionApi by inject(named("ContributionApi"))
+class ProfilePresenter(override val view: ProfileContract.View, private val contribution: ContributionRepository, private val user: UserRepository) : ProfileContract.Presenter, KoinComponent {
 
     private val rxBus : RxBus by inject()
 
@@ -36,19 +31,17 @@ class ProfilePresenter(override val view: ProfileContract.View, private val user
 
     override var userInfo = MutableLiveData<User>()
 
-    override fun getContribution(id: String) {
+    override fun getContributions(id: String) {
 
         view.showProgress()
 
         addDisposable(
-            getContribution.getContributions(id)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+            contribution.getContribution(id)
                 .subscribe(
                     {
                         Log.d("contribution", it.toString())
 
-                        getContributions(it)
+                        setContributions(it)
 
                         view.apply {
                             setUI(contributionList)
@@ -60,7 +53,7 @@ class ProfilePresenter(override val view: ProfileContract.View, private val user
         )
     }
 
-    private fun getContributions(contribution: Contribution) {
+    private fun setContributions(contribution: Contribution) {
 
         for (year in contribution.years!!) {
             val contributionDTO = ContributionDTO()
