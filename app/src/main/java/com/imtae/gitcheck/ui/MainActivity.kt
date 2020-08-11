@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.imtae.gitcheck.BR
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityMainBinding
@@ -26,21 +27,21 @@ import kotlinx.android.synthetic.main.tool_bar.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class MainActivity : BaseActivity(), MainContract.View {
+class MainActivity : BaseActivity<ActivityMainBinding>(
+    R.layout.activity_main,
+    BR.main
+), MainContract.View {
 
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
+
     private val progress : ProgressUtil by inject { parametersOf(this) }
 
     var userInfo : User = presenter.getUserInfo()
 
-    override lateinit var binding: ActivityMainBinding
     private lateinit var bindingNavigationHeader : NavigationHeaderBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.main = this
 
         bindingNavigationHeader = NavigationHeaderBinding.bind(navigation_view.getHeaderView(0))
         bindingNavigationHeader.headerNavigation = this

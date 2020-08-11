@@ -33,7 +33,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MainActivity" />
-        <activity android:name=".base.BaseActivity" />
     </application>
 
 </manifest>

@@ -1,12 +1,22 @@
 package com.imtae.gitcheck.base
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import com.imtae.gitcheck.BR
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 
-abstract class BaseActivity : RxAppCompatActivity() {
+abstract class BaseActivity<B: ViewDataBinding>(
+    @LayoutRes private val layoutResId: Int,
+    private val BR: Int
+) : RxAppCompatActivity() {
+
+    lateinit var binding: B
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +27,11 @@ abstract class BaseActivity : RxAppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         //resources.configuration.locales.get(0).language
         //Resources.getSystem().configuration.locales.get(0)
+
+
+        binding = DataBindingUtil.setContentView(this, layoutResId)
+        binding.setVariable(BR, this)
+        binding.lifecycleOwner = this
     }
 
     override fun onBackPressed() {

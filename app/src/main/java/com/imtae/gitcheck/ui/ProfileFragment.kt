@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.imtae.gitcheck.BR
 
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.ui.adapter.ContributionAdapter
@@ -23,29 +24,21 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class ProfileFragment : BaseFragment(), ProfileContract.View {
+class ProfileFragment : BaseFragment<FragmentProfileBinding>(
+    R.layout.fragment_profile,
+    BR.profile
+), ProfileContract.View {
 
     override val presenter: ProfileContract.Presenter by inject { parametersOf(this) }
-    private val progress : ProgressUtil by inject { parametersOf(this.context) }
 
-    override lateinit var binding: FragmentProfileBinding
+    private val progress : ProgressUtil by inject { parametersOf(this.context) }
 
     var user = MutableLiveData<User>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        activity?.drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
-        binding.lifecycleOwner = this
-        binding.profile = this
-
-        init()
-
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        init()
 
         if (arguments?.getString("name") != null) {
             userInfoLayout.visibility = View.GONE

@@ -3,26 +3,25 @@ package com.imtae.gitcheck.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.imtae.gitcheck.BR
 import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityLoginBinding
 import com.imtae.gitcheck.ui.contract.LoginContract
+import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class LoginActivity : BaseActivity(), LoginContract.View {
+class LoginActivity : BaseActivity<ActivityLoginBinding>(
+    R.layout.activity_login,
+    BR.login
+), LoginContract.View {
 
     override val presenter: LoginContract.Presenter by inject { parametersOf(this) }
-    override lateinit var binding : ActivityLoginBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        binding.login = this
-    }
 
     override fun onResume() {
         super.onResume()
