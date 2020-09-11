@@ -6,7 +6,7 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
 
-    factory { UserRepository() }
+    single { UserRepository() }
 
-    factory { ContributionRepository() }
+    single { ContributionRepository() }
 }

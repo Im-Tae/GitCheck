@@ -85,6 +85,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
     override fun showFragment(fragment: Fragment) {
 
+        setToolbarMain()
+
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(R.anim.slide_up,0,0, R.anim.slide_down)
             .add(R.id.drawer_layout, fragment)
