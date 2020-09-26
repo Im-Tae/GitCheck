@@ -45,7 +45,7 @@ class MainPresenter(override val view: MainContract.View, private val contributi
         view.showProgress()
 
         addDisposable(
-            contribution.getTodayContribution(user.name!!)
+            contribution.getTodayContribution(user.login)
                 .subscribe({
                     todayCommit.value = it.count
                     view.hideProgress()
