@@ -19,6 +19,5 @@ data class Range(
 data class Contributions (
     val date : String? = null,
     val count : Int = 0,
-    val color : String? = null,
-    val intensity : Int = 0
+    val color : String? = null
 )

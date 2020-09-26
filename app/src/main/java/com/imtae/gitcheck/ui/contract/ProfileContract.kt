@@ -18,7 +18,7 @@ class ProfileContract {
 
         val userInfo: MutableLiveData<User>
 
-        fun getContributions(id: String)
+        fun getContributions(userName: String)
 
         fun getUserInfo()
     }

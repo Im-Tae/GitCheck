@@ -19,6 +19,6 @@ val activityModule = module {
     }
 
     factory<MainContract.Presenter> {
-        (view: MainContract.View) -> MainPresenter(view)
+        (view: MainContract.View) -> MainPresenter(view, get())
     }
 }

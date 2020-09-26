@@ -31,12 +31,12 @@ class ProfilePresenter(override val view: ProfileContract.View, private val cont
 
     override var userInfo = MutableLiveData<User>()
 
-    override fun getContributions(id: String) {
+    override fun getContributions(userName: String) {
 
         view.showProgress()
 
         addDisposable(
-            contribution.getContribution(id)
+            contribution.getContribution(userName)
                 .subscribe(
                     {
                         Log.d("contribution", it.toString())
@@ -65,10 +65,10 @@ class ProfilePresenter(override val view: ProfileContract.View, private val cont
 
             addDisposable(
                 Observable.range(0, contribution.contributions!!.size - 1)
-                    .map { contribution.contributions[contribution.contributions.size - it - 1] }
+                    .map { contribution.contributions[it] }
                     .filter { it.date!!.contains(year.year!!) }
                     .subscribe {
-                        val contributionInfo = ContributionDTO.ContributionInfo(it.date!!, it.count, it.color!!, it.intensity)
+                        val contributionInfo = ContributionDTO.ContributionInfo(it.date!!, it.count, it.color!!)
                         contributionInfoList.add(contributionInfo)
                     }
             )

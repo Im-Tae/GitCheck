@@ -1,8 +1,10 @@
 package com.imtae.gitcheck.ui.presenter
 
 import android.os.Bundle
+import androidx.lifecycle.MutableLiveData
 import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.User
+import com.imtae.gitcheck.retrofit.repository.ContributionRepository
 import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.LoginActivity
 import com.imtae.gitcheck.ui.ProfileFragment
@@ -15,13 +17,15 @@ import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
-class MainPresenter(override val view: MainContract.View) : MainContract.Presenter, KoinComponent {
+class MainPresenter(override val view: MainContract.View, private val contribution: ContributionRepository) : MainContract.Presenter, KoinComponent {
 
     private val pref : PreferenceManager by inject { parametersOf(this) }
 
     val user : User by inject(named("getUserInfo"))
 
     private val rxBus : RxBus by inject()
+
+    override val todayCommit = MutableLiveData<Int>()
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -34,6 +38,19 @@ class MainPresenter(override val view: MainContract.View) : MainContract.Present
         profileFragment.arguments = bundle
 
         view.showFragment(profileFragment)
+    }
+
+    override fun getTodayContribution() {
+
+        view.showProgress()
+
+        addDisposable(
+            contribution.getTodayContribution(user.name!!)
+                .subscribe({
+                    todayCommit.value = it.count
+                    view.hideProgress()
+                },{})
+        )
     }
 
     override fun getUserInfo(): User = user

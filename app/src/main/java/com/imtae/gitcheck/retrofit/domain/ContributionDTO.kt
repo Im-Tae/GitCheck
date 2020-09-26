@@ -5,5 +5,5 @@ class ContributionDTO {
     var total : Int? = 0
     var contributionInfoList : ArrayList<ContributionInfo> = ArrayList()
 
-    data class ContributionInfo(var date: String, var count: Int, var color: String, var intensity: Int)
+    data class ContributionInfo(var date: String, var count: Int, var color: String)
 }

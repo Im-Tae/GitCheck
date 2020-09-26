@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GitCheck</string>
-    <string name="main_title">아무것도 없네요!</string>
+    <string name="main_title">오늘 커밋 :</string>
     <string name="main_content">검색을 통해 다른 사용자의 커밋을 확인하세요.</string>
     <string name="profile_name">이름</string>
     <string name="profile_nickname">닉네임</string>

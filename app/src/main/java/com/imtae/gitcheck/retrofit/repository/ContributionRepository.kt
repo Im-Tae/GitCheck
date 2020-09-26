@@ -1,6 +1,7 @@
 package com.imtae.gitcheck.retrofit.repository
 
 import com.imtae.gitcheck.retrofit.domain.Contribution
+import com.imtae.gitcheck.retrofit.domain.Contributions
 import com.imtae.gitcheck.retrofit.network.ContributionApi
 import com.imtae.gitcheck.utils.NetworkUtil
 import io.reactivex.Flowable
@@ -19,8 +20,8 @@ class ContributionRepository : KoinComponent {
 
     private val networkStatus: NetworkUtil by inject { parametersOf(this) }
 
-    fun getContribution(id: String): Single<Contribution> =
-        contributionApi.getContributions(id)
+    fun getContribution(userName: String): Single<Contribution> =
+        contributionApi.getContributions(userName)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .retryWhen {
@@ -32,4 +33,9 @@ class ContributionRepository : KoinComponent {
                         false
                     }
             }
+
+    fun getTodayContribution(userName: String): Single<Contributions> =
+        contributionApi.getTodayContribution(userName)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
 }

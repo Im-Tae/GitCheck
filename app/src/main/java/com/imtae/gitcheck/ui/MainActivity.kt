@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.imtae.gitcheck.BR
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
@@ -34,8 +35,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
 
-    private val progress : ProgressUtil by inject { parametersOf(this) }
-
     var userInfo : User = presenter.getUserInfo()
 
     private lateinit var bindingNavigationHeader : NavigationHeaderBinding
@@ -57,6 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     override fun init() {
 
         presenter.updateUserInfo()
+        presenter.getTodayContribution()
 
         Picasso.get().load(userInfo.avatar_url).into(bindingNavigationHeader.headerImage)
 
@@ -81,6 +81,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                 return false
             }
         })
+
+
+        presenter.todayCommit.observe(this, Observer { commit_textView.text = "${commit_textView.text} $it" })
+
     }
 
     override fun showFragment(fragment: Fragment) {
@@ -165,9 +169,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
     override fun showToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
-    override fun showProgress() = progress.show()
+    override fun showProgress() {
+        commit_textView.visibility = View.INVISIBLE
+        progress_bar.visibility = View.VISIBLE
+    }
 
-    override fun hideProgress() = progress.hide()
+    override fun hideProgress() {
+        commit_textView.visibility = View.VISIBLE
+        progress_bar.visibility = View.INVISIBLE
+    }
 
     override fun onBackPressed() {
 
