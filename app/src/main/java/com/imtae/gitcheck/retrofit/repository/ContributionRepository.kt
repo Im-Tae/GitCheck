@@ -26,6 +26,7 @@ class ContributionRepository : KoinComponent {
             .subscribeOn(Schedulers.io())
             .retryWhen {
                 Flowable.interval(3, TimeUnit.SECONDS)
+                    .onBackpressureDrop()
                     .retryUntil {
                         if(networkStatus.networkInfo())
                             return@retryUntil true
@@ -38,4 +39,14 @@ class ContributionRepository : KoinComponent {
         contributionApi.getTodayContribution(userName)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
+            .retryWhen {
+                Flowable.interval(3, TimeUnit.SECONDS)
+                    .onBackpressureDrop()
+                    .retryUntil {
+                        if(networkStatus.networkInfo())
+                            return@retryUntil true
+
+                        false
+                    }
+            }
 }

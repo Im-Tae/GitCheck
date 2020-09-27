@@ -4,8 +4,6 @@ import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.retrofit.network.ContributionApi
 import com.imtae.gitcheck.retrofit.network.TokenApi
 import com.imtae.gitcheck.retrofit.network.UserApi
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
@@ -29,7 +27,6 @@ val networkModule = module {
     }
 
     single {
-
         Retrofit.Builder()
             .addConverterFactory(get())
             .addCallAdapterFactory(get())

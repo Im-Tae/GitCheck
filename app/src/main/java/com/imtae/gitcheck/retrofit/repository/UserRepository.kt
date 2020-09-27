@@ -25,6 +25,7 @@ class UserRepository : KoinComponent {
             .subscribeOn(Schedulers.io())
             .retryWhen {
                 Flowable.interval(3, TimeUnit.SECONDS)
+                    .onBackpressureDrop()
                     .retryUntil {
                         if(networkStatus.networkInfo())
                             return@retryUntil true
