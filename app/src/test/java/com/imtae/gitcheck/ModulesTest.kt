@@ -11,7 +11,7 @@ class ModulesTest {
     @Test
     fun run() {
         startKoin {
-            printLogger(Level.DEBUG)
+            printLogger(Level.ERROR)
             modules(
                 appModule,
                 activityModule,
