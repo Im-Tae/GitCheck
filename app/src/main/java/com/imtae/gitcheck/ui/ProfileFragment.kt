@@ -3,15 +3,11 @@ package com.imtae.gitcheck.ui
 import android.os.Bundle
 import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.imtae.gitcheck.BR
-
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.ui.adapter.ContributionAdapter
 import com.imtae.gitcheck.base.BaseFragment
 import com.imtae.gitcheck.databinding.FragmentProfileBinding
-import com.imtae.gitcheck.retrofit.domain.ContributionDTO
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.ProgressUtil

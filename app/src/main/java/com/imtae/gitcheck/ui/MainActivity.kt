@@ -80,7 +80,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
             }
         })
 
-        presenter.todayCommit.observe(this, Observer { commit_textView.text = "${commit_textView.text} $it" })
+        presenter.todayCommit.observe(this, { commit_textView.text = "${commit_textView.text} $it" })
 
     }
 
