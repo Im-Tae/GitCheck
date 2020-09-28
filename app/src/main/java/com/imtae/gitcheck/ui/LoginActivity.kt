@@ -2,17 +2,13 @@ package com.imtae.gitcheck.ui
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import com.imtae.gitcheck.BR
 import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityLoginBinding
 import com.imtae.gitcheck.ui.contract.LoginContract
-import org.koin.android.ext.android.bind
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 

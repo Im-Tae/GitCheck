@@ -1,14 +1,12 @@
 package com.imtae.gitcheck.base
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.imtae.gitcheck.BR
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 
 abstract class BaseActivity<B: ViewDataBinding>(

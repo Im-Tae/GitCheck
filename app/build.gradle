@@ -10,9 +10,6 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
-    // 나중에 제거 하고 ndk 설치
-    ndkVersion "20.0.5594570"
-
     def keystorePropertiesFile = rootProject.file("keystore.properties")
     def keystoreProperties = new Properties()
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))

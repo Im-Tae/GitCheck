@@ -9,7 +9,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.imtae.gitcheck.BR
@@ -20,7 +19,6 @@ import com.imtae.gitcheck.databinding.NavigationHeaderBinding
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.KeyboardUtil
-import com.imtae.gitcheck.utils.ProgressUtil
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*

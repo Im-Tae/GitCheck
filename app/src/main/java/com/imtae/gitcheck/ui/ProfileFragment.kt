@@ -1,10 +1,7 @@
 package com.imtae.gitcheck.ui
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -33,19 +30,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
     private val progress : ProgressUtil by inject { parametersOf(this.context) }
 
-    var user = MutableLiveData<User>()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         init()
-
-        if (arguments?.getString("name") != null) {
-            userInfoLayout.visibility = View.GONE
-            presenter.getContributions(arguments?.getString("name")!!)
-        }
-        else
-            presenter.getUserInfo()
     }
 
     override fun onDestroy() {
@@ -56,9 +44,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
     override fun init() {
 
-        presenter.userInfo.observe(viewLifecycleOwner, Observer {
-            user.postValue(it)
-        })
+        if (arguments?.getString("name") != null) {
+            userInfoLayout.visibility = View.GONE
+            presenter.getContributions(arguments?.getString("name")!!)
+        }
+        else
+            presenter.getUserInfo()
     }
 
     override fun setUI(contributionList: ArrayList<ContributionDTO>) {
