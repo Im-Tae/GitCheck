@@ -44,17 +44,25 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
     override fun init() {
 
-        if (arguments?.getString("name") != null) {
-            userInfoLayout.visibility = View.GONE
-            presenter.getContributions(arguments?.getString("name")!!)
-        }
-        else
-            presenter.getUserInfo()
-    }
+        val userName = arguments?.getString("name") ?: ""
 
-    override fun setUI(contributionList: ArrayList<ContributionDTO>) {
-        recyclerView.adapter?.notifyDataSetChanged()
-        recyclerView.adapter = ContributionAdapter(contributionList)
+        if (userName.isNotEmpty()) {
+            userInfoLayout.visibility = View.GONE
+            presenter.getContributions(userName)
+            presenter.getTodayContribution(userName)
+        }
+        else presenter.getUserInfo()
+
+        presenter.contributionList.observe(viewLifecycleOwner, {
+            recyclerView.adapter?.notifyDataSetChanged()
+            recyclerView.adapter = ContributionAdapter(it)
+        })
+
+        presenter.todayCommit.observe(viewLifecycleOwner, {
+            fragment_commit_textView.visibility = View.VISIBLE
+            fragment_commit_textView.text = "${fragment_commit_textView.text} $it"
+        })
+
     }
 
     override fun setUserProfile(userInfo: User) {

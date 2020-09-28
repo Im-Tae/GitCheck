@@ -14,6 +14,7 @@ import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.BiFunction
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
@@ -27,9 +28,11 @@ class ProfilePresenter(override val view: ProfileContract.View, private val cont
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    private val contributionList = ArrayList<ContributionDTO>()
+    override val contributionList = MutableLiveData<ArrayList<ContributionDTO>>()
 
-    override var userInfo = MutableLiveData<User>()
+    override val todayCommit = MutableLiveData<Int>()
+
+    override val userInfo = MutableLiveData<User>()
 
     override fun getContributions(userName: String) {
 
@@ -39,14 +42,9 @@ class ProfilePresenter(override val view: ProfileContract.View, private val cont
             contribution.getContribution(userName)
                 .subscribe(
                     {
-                        Log.d("contribution", it.toString())
-
                         setContributions(it)
 
-                        view.apply {
-                            setUI(contributionList)
-                            hideProgress()
-                        }
+                        view.hideProgress()
                     },
                     { Log.d("error", it.message.toString()) }
                 )
@@ -54,6 +52,8 @@ class ProfilePresenter(override val view: ProfileContract.View, private val cont
     }
 
     private fun setContributions(contribution: Contribution) {
+
+        val _contributionList = ArrayList<ContributionDTO>()
 
         for (year in contribution.years!!) {
             val contributionDTO = ContributionDTO()
@@ -74,8 +74,11 @@ class ProfilePresenter(override val view: ProfileContract.View, private val cont
             )
 
             contributionDTO.contributionInfoList = contributionInfoList
-            this.contributionList.add(contributionDTO)
+
+            _contributionList.add(contributionDTO)
         }
+
+        contributionList.postValue(_contributionList)
     }
 
     override fun getUserInfo() {
@@ -94,6 +97,14 @@ class ProfilePresenter(override val view: ProfileContract.View, private val cont
                     },
                     { Log.d("error", it.message.toString()) }
                 )
+        )
+    }
+
+    override fun getTodayContribution(userName: String) {
+
+        addDisposable(
+            contribution.getTodayContribution(userName)
+                .subscribe({ todayCommit.postValue(it.count) },{ })
         )
     }
 

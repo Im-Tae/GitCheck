@@ -50,7 +50,7 @@ class MainPresenter(override val view: MainContract.View, private val contributi
                     todayCommit.postValue(it.count)
                     compositeDisposable.clear()
                     view.hideProgress()
-                },{ it.printStackTrace() })
+                },{ })
         )
     }
 
