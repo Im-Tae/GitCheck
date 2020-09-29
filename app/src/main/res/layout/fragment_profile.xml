@@ -71,8 +71,8 @@
                         android:gravity="center"
                         android:textSize="20dp"
                         style="@style/white_font_style_bold"
-                        android:visibility="@{profile.presenter.userInfo.name == null ? View.GONE : View.VISIBLE}"
-                        android:text="@{profile.presenter.userInfo.name}"/>
+                        android:visibility="@{profile.user.name == null ? View.GONE : View.VISIBLE}"
+                        android:text="@{profile.user.name}"/>
 
                     <TextView
                         android:id="@+id/nickname"
@@ -80,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="15dp"
                         style="@style/white_font_style_basic"
-                        android:text="@{profile.presenter.userInfo.login}"/>
+                        android:text="@{profile.user.login}"/>
 
                 </LinearLayout>
 
@@ -100,8 +100,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
                     style="@style/white_font_style_bold"
-                    android:visibility="@{profile.presenter.userInfo.bio == null ? View.GONE : View.VISIBLE}"
-                    android:text="@{profile.presenter.userInfo.bio}"/>
+                    android:visibility="@{profile.user.bio == null ? View.GONE : View.VISIBLE}"
+                    android:text="@{profile.user.bio}"/>
 
                 <!--company-->
                 <LinearLayout
@@ -110,7 +110,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:visibility="@{profile.presenter.userInfo.company == null ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{profile.user.company == null ? View.GONE : View.VISIBLE}">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
                         android:layout_marginStart="10dp"
                         android:textSize="15dp"
                         style="@style/white_font_style_basic"
-                        android:text="@{profile.presenter.userInfo.company}"/>
+                        android:text="@{profile.user.company}"/>
 
                 </LinearLayout>
 
@@ -135,7 +135,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:visibility="@{profile.presenter.userInfo.location == null ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{profile.user.location == null ? View.GONE : View.VISIBLE}">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -149,7 +149,7 @@
                         android:layout_marginStart="10dp"
                         android:textSize="15dp"
                         style="@style/white_font_style_basic"
-                        android:text="@{profile.presenter.userInfo.location}"/>
+                        android:text="@{profile.user.location}"/>
 
                 </LinearLayout>
 
@@ -160,7 +160,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:visibility="@{profile.presenter.userInfo.email == null ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{profile.user.email == null ? View.GONE : View.VISIBLE}">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -175,7 +175,7 @@
                         android:autoLink="email"
                         android:textSize="15dp"
                         style="@style/white_font_style_basic"
-                        android:text="@{profile.presenter.userInfo.email}"/>
+                        android:text="@{profile.user.email}"/>
 
                 </LinearLayout>
 
@@ -186,7 +186,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:visibility="@{profile.presenter.userInfo.blog == null ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{profile.user.blog == null ? View.GONE : View.VISIBLE}">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -201,7 +201,7 @@
                         android:autoLink="web"
                         android:textSize="15dp"
                         style="@style/white_font_style_basic"
-                        android:text="@{profile.presenter.userInfo.blog}"/>
+                        android:text="@{profile.user.blog}"/>
 
                 </LinearLayout>
 
@@ -212,7 +212,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:visibility="@{profile.presenter.userInfo.followers == null || profile.presenter.userInfo.following == null  ? View.GONE : View.VISIBLE}">
+                    android:visibility="@{profile.user.followers == null || profile.user.following == null  ? View.GONE : View.VISIBLE}">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -226,7 +226,7 @@
                         android:layout_marginStart="10dp"
                         android:textSize="15dp"
                         style="@style/white_font_style_basic"
-                        android:text="@{profile.presenter.userInfo.followers.toString()}"/>
+                        android:text="@{profile.user.followers.toString()}"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -243,7 +243,7 @@
                         android:layout_marginStart="5dp"
                         android:textSize="15dp"
                         style="@style/white_font_style_basic"
-                        android:text="@{profile.presenter.userInfo.following.toString()}"/>
+                        android:text="@{profile.user.following.toString()}"/>
 
                     <TextView
                         android:layout_width="wrap_content"

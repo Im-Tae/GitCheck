@@ -22,6 +22,7 @@ abstract class BaseFragment<B: ViewDataBinding>(
         binding = DataBindingUtil.inflate(inflater, layoutResId, container, false)
         binding.setVariable(BR, this)
         binding.lifecycleOwner = this
+        binding.invalidateAll()
 
         return binding.root
     }

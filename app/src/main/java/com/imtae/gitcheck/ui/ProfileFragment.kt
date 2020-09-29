@@ -3,6 +3,7 @@ package com.imtae.gitcheck.ui
 import android.os.Bundle
 import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.MutableLiveData
 import com.imtae.gitcheck.BR
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.ui.adapter.ContributionAdapter
@@ -25,6 +26,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     override val presenter: ProfileContract.Presenter by inject { parametersOf(this) }
 
     private val progress : ProgressUtil by inject { parametersOf(this.context) }
+
+    val user = MutableLiveData<User>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,6 +62,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             fragment_commit_textView.text = "${fragment_commit_textView.text} $it"
         })
 
+        presenter.userInfo.observe(viewLifecycleOwner, { user.postValue(it) })
     }
 
     override fun setUserProfile(userInfo: User) {
