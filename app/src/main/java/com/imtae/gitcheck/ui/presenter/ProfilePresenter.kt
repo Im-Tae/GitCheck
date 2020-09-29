@@ -90,7 +90,7 @@ class ProfilePresenter(override val view: ProfileContract.View, private val cont
                     {
                         pref.setUserInfo(Key.User_Info.toString(), it).apply {
                             rxBus.publish(it)
-                            userInfo.value = it
+                            userInfo.postValue(it)
                             view.setUserProfile(it)
                         }
                     },
