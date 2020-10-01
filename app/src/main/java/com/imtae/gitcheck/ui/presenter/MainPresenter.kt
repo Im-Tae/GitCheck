@@ -28,11 +28,11 @@ class MainPresenter(override val view: MainContract.View, private val contributi
 
     private val rxBus : RxBus by inject()
 
+    private val currentDate : String by inject(named("getCurrentDate"))
+
     override val todayCommit = MutableLiveData<Int>()
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
-
-    private val currentDate = SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().time)
 
     override fun searchUser(name: String) {
 

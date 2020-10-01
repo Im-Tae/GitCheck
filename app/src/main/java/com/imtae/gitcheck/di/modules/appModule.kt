@@ -9,6 +9,8 @@ import com.imtae.gitcheck.utils.ProgressUtil
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import java.text.SimpleDateFormat
+import java.util.*
 
 val appModule = module {
     factory { (context: Context) -> ProgressUtil(context) }
@@ -20,4 +22,6 @@ val appModule = module {
     single { NetworkUtil(androidContext()) }
 
     single { RxBus }
+
+    single(named("getCurrentDate")) { SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().time) }
 }

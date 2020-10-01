@@ -17,6 +17,9 @@ import io.reactivex.disposables.Disposable
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.named
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.ArrayList
 
 class ProfilePresenter(override val view: ProfileContract.View, private val contribution: ContributionRepository, private val user: UserRepository) : ProfileContract.Presenter, KoinComponent {
@@ -24,6 +27,8 @@ class ProfilePresenter(override val view: ProfileContract.View, private val cont
     private val rxBus : RxBus by inject()
 
     private val pref : PreferenceManager by inject { parametersOf(this) }
+
+    private val currentDate : String by inject(named("getCurrentDate"))
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -102,7 +107,7 @@ class ProfilePresenter(override val view: ProfileContract.View, private val cont
     override fun getTodayContribution(userName: String) {
 
         addDisposable(
-            contribution.getTodayContribution(userName)
+            contribution.getDesiredContribution(userName, currentDate)
                 .subscribe({ todayCommit.postValue(it.count) },{ })
         )
     }
