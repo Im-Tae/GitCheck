@@ -49,4 +49,19 @@ class ContributionRepository : KoinComponent {
                         false
                     }
             }
+
+    fun getDesiredContribution(userName: String, date: String): Single<Contributions> =
+        contributionApi.getDesiredContribution(userName, date)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .retryWhen {
+                Flowable.interval(3, TimeUnit.SECONDS)
+                    .onBackpressureDrop()
+                    .retryUntil {
+                        if(networkStatus.networkInfo())
+                            return@retryUntil true
+
+                        false
+                    }
+            }
 }

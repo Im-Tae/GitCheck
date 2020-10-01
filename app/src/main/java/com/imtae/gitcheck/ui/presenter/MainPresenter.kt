@@ -1,6 +1,7 @@
 package com.imtae.gitcheck.ui.presenter
 
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.User
@@ -16,6 +17,8 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainPresenter(override val view: MainContract.View, private val contribution: ContributionRepository) : MainContract.Presenter, KoinComponent {
 
@@ -28,6 +31,8 @@ class MainPresenter(override val view: MainContract.View, private val contributi
     override val todayCommit = MutableLiveData<Int>()
 
     override val compositeDisposable: CompositeDisposable = CompositeDisposable()
+
+    private val currentDate = SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().time)
 
     override fun searchUser(name: String) {
 
@@ -44,8 +49,10 @@ class MainPresenter(override val view: MainContract.View, private val contributi
 
         view.showProgress()
 
+        Log.d("test", currentDate)
+
         addDisposable(
-            contribution.getTodayContribution(user.login)
+            contribution.getDesiredContribution(user.login, currentDate)
                 .subscribe({
                     todayCommit.postValue(it.count)
                     compositeDisposable.clear()

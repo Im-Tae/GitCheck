@@ -12,4 +12,7 @@ interface ContributionApi {
 
     @GET("/user/{user}/today")
     fun getTodayContribution(@Path("user") user: String): Single<Contributions>
+
+    @GET("/user/{user}/{date}")
+    fun getDesiredContribution(@Path("user") user: String, @Path("date") date: String): Single<Contributions>
 }
