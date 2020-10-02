@@ -14,7 +14,9 @@ import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 import java.util.concurrent.TimeUnit
 
-class SplashPresenter(override val view: SplashContract.View) : SplashContract.Presenter, KoinComponent {
+class SplashPresenter(
+    override val view: SplashContract.View
+) : SplashContract.Presenter, KoinComponent {
 
     override val compositeDisposable : CompositeDisposable = CompositeDisposable()
 

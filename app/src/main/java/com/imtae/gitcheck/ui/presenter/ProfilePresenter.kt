@@ -22,7 +22,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ProfilePresenter(override val view: ProfileContract.View, private val contribution: ContributionRepository, private val user: UserRepository) : ProfileContract.Presenter, KoinComponent {
+class ProfilePresenter(
+    override val view: ProfileContract.View,
+    private val contribution: ContributionRepository,
+    private val user: UserRepository
+) : ProfileContract.Presenter, KoinComponent {
 
     private val rxBus : RxBus by inject()
 

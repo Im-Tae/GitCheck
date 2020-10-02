@@ -19,7 +19,10 @@ import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
-class LoginPresenter(override val view: LoginContract.View, private val user: UserRepository) : LoginContract.Presenter, KoinComponent {
+class LoginPresenter(
+    override val view: LoginContract.View,
+    private val user: UserRepository
+) : LoginContract.Presenter, KoinComponent {
 
     private val pref : PreferenceManager by inject { parametersOf(this) }
 

@@ -20,7 +20,10 @@ import org.koin.core.qualifier.named
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainPresenter(override val view: MainContract.View, private val contribution: ContributionRepository) : MainContract.Presenter, KoinComponent {
+class MainPresenter(
+    override val view: MainContract.View,
+    private val contribution: ContributionRepository
+) : MainContract.Presenter, KoinComponent {
 
     private val pref : PreferenceManager by inject { parametersOf(this) }
 
@@ -48,8 +51,6 @@ class MainPresenter(override val view: MainContract.View, private val contributi
     override fun getTodayContribution() {
 
         view.showProgress()
-
-        Log.d("test", currentDate)
 
         addDisposable(
             contribution.getDesiredContribution(user.login, currentDate)
