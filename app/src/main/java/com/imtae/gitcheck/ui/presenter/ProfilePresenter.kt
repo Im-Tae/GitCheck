@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.Contribution
 import com.imtae.gitcheck.retrofit.domain.ContributionDTO
+import com.imtae.gitcheck.retrofit.domain.Contributions
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.retrofit.repository.ContributionRepository
 import com.imtae.gitcheck.retrofit.repository.UserRepository
@@ -12,8 +13,10 @@ import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.functions.BiFunction
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
@@ -40,22 +43,48 @@ class ProfilePresenter(
 
     override val userInfo = MutableLiveData<User>()
 
-    override fun getContributions(userName: String) {
+    override fun getUserProfile() {
 
         view.showProgress()
 
         addDisposable(
-            contribution.getContribution(userName)
-                .subscribe(
-                    {
-                        setContributions(it)
+            Single.zip(
+                getContributions(pref.getUserInfo(Key.User_Info.toString()).login),
+                getUserInfo(),
+                { contribution: Contribution, user: User -> Pair(contribution, user) }
+            )
+                .doOnSuccess { view.hideProgress() }
+                .subscribe{ it ->
+                    setContributions(it.first)
 
-                        view.hideProgress()
-                    },
-                    { Log.d("error", it.message.toString()) }
-                )
+                    pref.setUserInfo(Key.User_Info.toString(), it.second).apply {
+                        rxBus.publish(it.second)
+                        userInfo.postValue(it.second)
+                    }
+                }
         )
     }
+
+    override fun getSearchProfile(userName: String) {
+
+        view.showProgress()
+
+        addDisposable(
+            Single.zip(
+                getContributions(userName),
+                getTodayContribution(userName),
+                { contribution: Contribution, todayContribution: Contributions -> Pair(contribution, todayContribution) }
+            )
+                .doOnSuccess { view.hideProgress() }
+                .subscribe{ it ->
+                    setContributions(it.first)
+                    todayCommit.postValue(it.second.count)
+                }
+        )
+
+    }
+
+    private fun getContributions(userName: String): Single<Contribution> = contribution.getContribution(userName)
 
     private fun setContributions(contribution: Contribution) {
 
@@ -87,32 +116,9 @@ class ProfilePresenter(
         contributionList.postValue(_contributionList)
     }
 
-    override fun getUserInfo() {
+    private fun getUserInfo(): Single<User> = pref.getData(Key.Access_Token.toString())!!.let { user.getUserInfo(it) }
 
-        val token = pref.getData(Key.Access_Token.toString())!!
-
-        addDisposable(
-            user.getUserInfo(token)
-                .subscribe(
-                    {
-                        pref.setUserInfo(Key.User_Info.toString(), it).apply {
-                            rxBus.publish(it)
-                            userInfo.postValue(it)
-                            view.setUserProfile(it)
-                        }
-                    },
-                    { Log.d("error", it.message.toString()) }
-                )
-        )
-    }
-
-    override fun getTodayContribution(userName: String) {
-
-        addDisposable(
-            contribution.getDesiredContribution(userName, currentDate)
-                .subscribe({ todayCommit.postValue(it.count) },{ })
-        )
-    }
+    private fun getTodayContribution(userName: String) = contribution.getDesiredContribution(userName, currentDate)
 
     override fun addDisposable(disposable: Disposable) { compositeDisposable.add(disposable) }
 

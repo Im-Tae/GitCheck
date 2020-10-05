@@ -47,10 +47,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
 
         if (userName.isNotEmpty()) {
             userInfoLayout.visibility = View.GONE
-            presenter.getContributions(userName)
-            presenter.getTodayContribution(userName)
+            presenter.getSearchProfile(userName)
         }
-        else presenter.getUserInfo()
+        else presenter.getUserProfile()
 
         presenter.contributionList.observe(viewLifecycleOwner, {
             recyclerView.adapter?.notifyDataSetChanged()
@@ -62,12 +61,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             fragment_commit_textView.text = "${fragment_commit_textView.text} $it"
         })
 
-        presenter.userInfo.observe(viewLifecycleOwner, { user.postValue(it) })
-    }
-
-    override fun setUserProfile(userInfo: User) {
-        Picasso.get().load(userInfo.avatar_url).into(binding.image)
-        presenter.getContributions(userInfo.login)
+        presenter.userInfo.observe(viewLifecycleOwner, {
+            Picasso.get().load(it.avatar_url).into(binding.image)
+            user.postValue(it)
+        })
     }
 
     override fun hideKeyboard() {}

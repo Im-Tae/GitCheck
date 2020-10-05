@@ -7,10 +7,7 @@ import com.imtae.gitcheck.retrofit.domain.ContributionDTO
 import com.imtae.gitcheck.retrofit.domain.User
 
 class ProfileContract {
-    interface View : BaseView<Presenter> {
-
-        fun setUserProfile(userInfo: User)
-    }
+    interface View : BaseView<Presenter>
 
     interface Presenter : BasePresenter<View> {
 
@@ -20,10 +17,8 @@ class ProfileContract {
 
         val todayCommit : MutableLiveData<Int>
 
-        fun getContributions(userName: String)
+        fun getUserProfile()
 
-        fun getTodayContribution(userName: String)
-
-        fun getUserInfo()
+        fun getSearchProfile(userName: String)
     }
 }
