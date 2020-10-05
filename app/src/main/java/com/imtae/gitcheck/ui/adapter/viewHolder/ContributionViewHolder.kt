@@ -5,7 +5,10 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.setMargins
 import androidx.recyclerview.widget.RecyclerView
+import com.imtae.gitcheck.R
 import com.imtae.gitcheck.retrofit.domain.ContributionDTO
+import com.skydoves.balloon.BalloonAnimation
+import com.skydoves.balloon.createBalloon
 import kotlinx.android.synthetic.main.contributions_layout.view.*
 
 class ContributionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -23,6 +26,23 @@ class ContributionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
             val layout = LinearLayout(itemView.context).apply {
                 layoutParams = param
                 setBackgroundColor(Color.parseColor(contributionList.contributionInfoList[commitIndex].color))
+            }
+
+            layout.setOnClickListener {
+
+                val showContributionBalloon = createBalloon(itemView.context) {
+                    setText("${contributionList.contributionInfoList[commitIndex].date} \n ${contributionList.contributionInfoList[commitIndex].count}")
+                    setTextColorResource(R.color.white)
+                    setTextSize(15f)
+                    setPadding(3)
+                    setArrowVisible(false)
+                    setBackgroundColorResource(R.color.github_color)
+                    setBalloonAnimation(BalloonAnimation.CIRCULAR)
+                    setAutoDismissDuration(2000L)
+                }
+
+                showContributionBalloon.setOnBalloonClickListener { showContributionBalloon.dismiss() }
+                showContributionBalloon.showAlignTop(layout)
             }
 
             itemView.contribution_GridLayout.addView(layout)
