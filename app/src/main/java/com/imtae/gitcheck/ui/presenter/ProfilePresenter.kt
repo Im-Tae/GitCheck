@@ -55,6 +55,7 @@ class ProfilePresenter(
             )
                 .doOnSuccess { view.hideProgress() }
                 .subscribe{ it ->
+
                     setContributions(it.first)
 
                     pref.setUserInfo(Key.User_Info.toString(), it.second).apply {
@@ -77,8 +78,12 @@ class ProfilePresenter(
             )
                 .doOnSuccess { view.hideProgress() }
                 .subscribe{ it ->
-                    setContributions(it.first)
-                    todayCommit.postValue(it.second.count)
+
+                    if (it.first.years!!.size == 0) view.showUserNotFoundUI()
+                    else {
+                        setContributions(it.first)
+                        todayCommit.postValue(it.second.count)
+                    }
                 }
         )
 

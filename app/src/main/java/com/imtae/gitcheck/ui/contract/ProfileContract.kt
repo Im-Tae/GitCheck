@@ -7,7 +7,10 @@ import com.imtae.gitcheck.retrofit.domain.ContributionDTO
 import com.imtae.gitcheck.retrofit.domain.User
 
 class ProfileContract {
-    interface View : BaseView<Presenter>
+    interface View : BaseView<Presenter> {
+
+        fun showUserNotFoundUI()
+    }
 
     interface Presenter : BasePresenter<View> {
 

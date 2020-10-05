@@ -18,5 +18,6 @@
     <string name="fri">금</string>
     <string name="sat">토</string>
     <string name="total">"총 커밋 : "</string>
+    <string name="no_user">유저 정보가 없습니다</string>
 
 </resources>

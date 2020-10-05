@@ -17,5 +17,6 @@
     <string name="fri">Fri</string>
     <string name="sat">Sat</string>
     <string name="total">"Total : "</string>
+    <string name="no_user">No User Found</string>
 
 </resources>

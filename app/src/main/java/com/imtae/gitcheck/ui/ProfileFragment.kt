@@ -67,6 +67,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         })
     }
 
+    override fun showUserNotFoundUI() {
+        profile_view.visibility = View.GONE
+        user_not_found_textView.visibility = View.VISIBLE
+    }
+
     override fun hideKeyboard() {}
 
     override fun hideProgress() = progress.hide()

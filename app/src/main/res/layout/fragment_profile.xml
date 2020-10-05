@@ -8,7 +8,7 @@
         <import type="android.view.View"/>
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,262 +17,283 @@
         tools:context=".ui.ProfileFragment"
         android:background="@color/white">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:focusable="true">
+        <TextView
+            android:id="@+id/user_not_found_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            style="@style/black_font_style_bold"
+            android:text="@string/no_user"
+            android:visibility="gone"/>
 
-            <TextView
-                android:id="@+id/fragment_commit_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textSize="30sp"
-                android:paddingTop="20dp"
-                style="@style/black_font_style_bold"
-                android:text="@string/main_title"
-                android:visibility="gone"/>
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/profile_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/userInfoLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@color/github_color">
+                android:clickable="true"
+                android:focusable="true">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/fragment_commit_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center"
-                    android:layout_marginStart="10dp"
-                    >
+                    android:layout_gravity="center"
+                    android:textSize="30sp"
+                    android:paddingTop="20dp"
+                    style="@style/black_font_style_bold"
+                    android:text="@string/main_title"
+                    android:visibility="gone"/>
 
-                    <ImageView
-                        android:id="@+id/image"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"/>
+                <LinearLayout
+                    android:id="@+id/userInfoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:orientation="vertical"
+                    android:background="@color/github_color">
 
-                    <!--name&nickname-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
+                        android:gravity="center"
                         android:layout_marginStart="10dp"
                         >
 
-                        <TextView
-                            android:id="@+id/name"
+                        <ImageView
+                            android:id="@+id/image"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"/>
+
+                        <!--name&nickname-->
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="5dp"
-                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_marginStart="10dp"
+                            >
+
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="5dp"
+                                android:gravity="center"
+                                android:textSize="20dp"
+                                style="@style/white_font_style_bold"
+                                android:visibility="@{profile.user.name == null ? View.GONE : View.VISIBLE}"
+                                android:text="@{profile.user.name}"/>
+
+                            <TextView
+                                android:id="@+id/nickname"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15dp"
+                                style="@style/white_font_style_basic"
+                                android:text="@{profile.user.login}"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <!--bio-->
+                        <TextView
+                            android:id="@+id/bio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:textSize="20dp"
                             style="@style/white_font_style_bold"
-                            android:visibility="@{profile.user.name == null ? View.GONE : View.VISIBLE}"
-                            android:text="@{profile.user.name}"/>
+                            android:visibility="@{profile.user.bio == null ? View.GONE : View.VISIBLE}"
+                            android:text="@{profile.user.bio}"/>
 
-                        <TextView
-                            android:id="@+id/nickname"
+                        <!--company-->
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="15dp"
-                            style="@style/white_font_style_basic"
-                            android:text="@{profile.user.login}"/>
+                            android:orientation="horizontal"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:visibility="@{profile.user.company == null ? View.GONE : View.VISIBLE}">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_people_black_24dp"/>
+
+                            <TextView
+                                android:id="@+id/company"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:textSize="15dp"
+                                style="@style/white_font_style_basic"
+                                android:text="@{profile.user.company}"/>
+
+                        </LinearLayout>
+
+                        <!--location-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:visibility="@{profile.user.location == null ? View.GONE : View.VISIBLE}">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_location_on_black_24dp"/>
+
+                            <TextView
+                                android:id="@+id/location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:textSize="15dp"
+                                style="@style/white_font_style_basic"
+                                android:text="@{profile.user.location}"/>
+
+                        </LinearLayout>
+
+                        <!--email-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:visibility="@{profile.user.email == null ? View.GONE : View.VISIBLE}">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_email_black_24dp"/>
+
+                            <TextView
+                                android:id="@+id/email"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:autoLink="email"
+                                android:textSize="15dp"
+                                style="@style/white_font_style_basic"
+                                android:text="@{profile.user.email}"/>
+
+                        </LinearLayout>
+
+                        <!--blog-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:visibility="@{profile.user.blog == null ? View.GONE : View.VISIBLE}">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_link_black_24dp"/>
+
+                            <TextView
+                                android:id="@+id/blog"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:autoLink="web"
+                                android:textSize="15dp"
+                                style="@style/white_font_style_basic"
+                                android:text="@{profile.user.blog}"/>
+
+                        </LinearLayout>
+
+                        <!--followers & following-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:visibility="@{profile.user.followers == null || profile.user.following == null  ? View.GONE : View.VISIBLE}">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_person_black_24dp"/>
+
+                            <TextView
+                                android:id="@+id/followers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:textSize="15dp"
+                                style="@style/white_font_style_basic"
+                                android:text="@{profile.user.followers.toString()}"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:textSize="15dp"
+                                style="@style/white_font_style_basic"
+                                android:text="@string/followers"/>
+
+                            <TextView
+                                android:id="@+id/following"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:textSize="15dp"
+                                style="@style/white_font_style_basic"
+                                android:text="@{profile.user.following.toString()}"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:textSize="15dp"
+                                style="@style/white_font_style_basic"
+                                android:text="@string/following"/>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical">
-
-                    <!--bio-->
-                    <TextView
-                        android:id="@+id/bio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20dp"
-                        style="@style/white_font_style_bold"
-                        android:visibility="@{profile.user.bio == null ? View.GONE : View.VISIBLE}"
-                        android:text="@{profile.user.bio}"/>
-
-                    <!--company-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center"
-                        android:visibility="@{profile.user.company == null ? View.GONE : View.VISIBLE}">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_people_black_24dp"/>
-
-                        <TextView
-                            android:id="@+id/company"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:textSize="15dp"
-                            style="@style/white_font_style_basic"
-                            android:text="@{profile.user.company}"/>
-
-                    </LinearLayout>
-
-                    <!--location-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:visibility="@{profile.user.location == null ? View.GONE : View.VISIBLE}">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_location_on_black_24dp"/>
-
-                        <TextView
-                            android:id="@+id/location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:textSize="15dp"
-                            style="@style/white_font_style_basic"
-                            android:text="@{profile.user.location}"/>
-
-                    </LinearLayout>
-
-                    <!--email-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:visibility="@{profile.user.email == null ? View.GONE : View.VISIBLE}">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_email_black_24dp"/>
-
-                        <TextView
-                            android:id="@+id/email"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:autoLink="email"
-                            android:textSize="15dp"
-                            style="@style/white_font_style_basic"
-                            android:text="@{profile.user.email}"/>
-
-                    </LinearLayout>
-
-                    <!--blog-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:visibility="@{profile.user.blog == null ? View.GONE : View.VISIBLE}">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_link_black_24dp"/>
-
-                        <TextView
-                            android:id="@+id/blog"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:autoLink="web"
-                            android:textSize="15dp"
-                            style="@style/white_font_style_basic"
-                            android:text="@{profile.user.blog}"/>
-
-                    </LinearLayout>
-
-                    <!--followers & following-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:visibility="@{profile.user.followers == null || profile.user.following == null  ? View.GONE : View.VISIBLE}">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_person_black_24dp"/>
-
-                        <TextView
-                            android:id="@+id/followers"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:textSize="15dp"
-                            style="@style/white_font_style_basic"
-                            android:text="@{profile.user.followers.toString()}"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:textSize="15dp"
-                            style="@style/white_font_style_basic"
-                            android:text="@string/followers"/>
-
-                        <TextView
-                            android:id="@+id/following"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:textSize="15dp"
-                            style="@style/white_font_style_basic"
-                            android:text="@{profile.user.following.toString()}"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:textSize="15dp"
-                            style="@style/white_font_style_basic"
-                            android:text="@string/following"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:id="@+id/recyclerView"
+                    tools:listitem="@layout/contributions_layout"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:overScrollMode="never"/>
 
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/recyclerView"
-                tools:listitem="@layout/contributions_layout"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:overScrollMode="never"/>
+        </androidx.core.widget.NestedScrollView>
 
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
