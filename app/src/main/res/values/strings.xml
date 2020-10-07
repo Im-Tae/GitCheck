@@ -18,5 +18,7 @@
     <string name="sat">Sat</string>
     <string name="total">"Total : "</string>
     <string name="no_user">No User Found</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.imtae.gitcheck.di.modules
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.imtae.gitcheck.retrofit.data.Key
+import com.imtae.gitcheck.ui.widget.TodayCommitWidget
 import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.utils.NetworkUtil
 import com.imtae.gitcheck.utils.PreferenceManager
@@ -12,6 +14,7 @@ import org.koin.dsl.module
 import java.text.SimpleDateFormat
 import java.util.*
 
+@SuppressLint("SimpleDateFormat")
 val appModule = module {
     factory { (context: Context) -> ProgressUtil(context) }
 
