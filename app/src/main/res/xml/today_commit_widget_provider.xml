@@ -4,6 +4,7 @@
     android:initialLayout="@layout/today_commit_widget"
     android:minWidth="150dp"
     android:minHeight="40dp"
+    android:previewImage="@drawable/today_commit_widget_preview_image"
     android:resizeMode="horizontal"
     android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen"/>
