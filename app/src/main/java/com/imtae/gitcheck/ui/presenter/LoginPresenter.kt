@@ -5,7 +5,6 @@ import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.data.Key.Key
 import com.imtae.gitcheck.data.network.TokenApi
 import com.imtae.gitcheck.data.repository.UserRepository
-import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.LoginContract
 import com.imtae.gitcheck.utils.PreferenceManager
@@ -27,8 +26,6 @@ class LoginPresenter(
     private val pref : PreferenceManager by inject { parametersOf(this) }
 
     private val getToken : TokenApi by inject(named("TokenApi"))
-
-    private val rxBus : RxBus by inject()
 
     override fun loginGithub() {
         val httpUrl = HttpUrl.Builder()
@@ -66,10 +63,8 @@ class LoginPresenter(
             user.getUserInfo(token)
                 .subscribe(
                     {
-                        pref.setUserInfo(Key.User_Info.toString(), it).apply {
-                            rxBus.publish(it)
-                            view.startActivity(MainActivity::class.java)
-                        }
+                        pref.setUserInfo(Key.User_Info.toString(), it)
+                        view.startActivity(MainActivity::class.java)
                     },
                     { Log.d("error", it.message.toString()) }
                 )

@@ -8,7 +8,6 @@ import com.imtae.gitcheck.data.domain.Contributions
 import com.imtae.gitcheck.data.domain.User
 import com.imtae.gitcheck.data.repository.ContributionRepository
 import com.imtae.gitcheck.data.repository.UserRepository
-import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.Observable
@@ -26,8 +25,6 @@ class ProfilePresenter(
     private val contribution: ContributionRepository,
     private val user: UserRepository
 ) : ProfileContract.Presenter, KoinComponent {
-
-    private val rxBus : RxBus by inject()
 
     private val pref : PreferenceManager by inject { parametersOf(this) }
 
@@ -58,10 +55,8 @@ class ProfilePresenter(
 
                     setContributions(it.first)
 
-                    pref.setUserInfo(Key.User_Info.toString(), it.second).apply {
-                        rxBus.publish(it.second)
-                        userInfo.postValue(it.second)
-                    }
+                    pref.setUserInfo(Key.User_Info.toString(), it.second)
+                    userInfo.postValue(it.second)
                 }
         )
     }

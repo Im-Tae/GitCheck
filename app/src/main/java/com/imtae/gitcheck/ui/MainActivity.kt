@@ -33,7 +33,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
     override val presenter: MainContract.Presenter by inject { parametersOf(this) }
 
-    var userInfo : User = presenter.getUserInfo()
+    var userInfo : User = presenter.user
 
     private lateinit var bindingNavigationHeader : NavigationHeaderBinding
 
@@ -44,11 +44,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         bindingNavigationHeader.headerNavigation = this
 
         init()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        presenter.updateUserInfo()
     }
 
     override fun onDestroy() {
@@ -83,7 +78,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
             }
         })
 
-        presenter.todayCommit.observe(this, { commit_textView.text = "${commit_textView.text} $it" })
+        presenter.todayCommit.observe(this, {
+            commit_textView.text = "${this.resources.getString(R.string.main_title)} $it" })
 
     }
 
@@ -131,7 +127,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     override fun onNavigationItemSelected(item : MenuItem): Boolean {
 
         when(item.itemId) {
-            R.id.nav_settings -> {}
+            R.id.nav_settings -> showToast("준비중")
             R.id.nav_logout -> {
                 presenter.logout()
                 finish()
@@ -156,8 +152,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         show_navigation_bar_button.visibility = View.INVISIBLE
         search_button.visibility = View.GONE
     }
-
-    override fun setUser(user: User) { userInfo = user }
 
     override fun startActivity(activityName: Class<*>) = startActivity(Intent(this, activityName))
 

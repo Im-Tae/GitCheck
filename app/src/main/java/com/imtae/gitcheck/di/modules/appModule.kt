@@ -3,7 +3,6 @@ package com.imtae.gitcheck.di.modules
 import android.annotation.SuppressLint
 import android.content.Context
 import com.imtae.gitcheck.data.Key.Key
-import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.utils.NetworkUtil
 import com.imtae.gitcheck.utils.PreferenceManager
 import com.imtae.gitcheck.utils.ProgressUtil
@@ -22,8 +21,6 @@ val appModule = module {
     factory(named("getUserInfo")) { PreferenceManager(androidContext()).getUserInfo(Key.User_Info.toString()) }
 
     single { NetworkUtil(androidContext()) }
-
-    single { RxBus }
 
     single(named("getCurrentDate")) { SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().time) }
 }

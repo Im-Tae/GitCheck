@@ -13,8 +13,6 @@ class MainContract {
 
         fun hideNavigationDrawer()
 
-        fun setUser(user: User)
-
         fun showFragment(fragment: Fragment)
     }
 
@@ -22,14 +20,12 @@ class MainContract {
 
         val todayCommit : MutableLiveData<Int>
 
+        val user : User
+
         fun searchUser(name: String)
 
         fun getTodayContribution()
 
         fun logout()
-
-        fun getUserInfo(): User
-
-        fun updateUserInfo()
     }
 }

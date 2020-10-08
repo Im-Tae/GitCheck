@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.imtae.gitcheck.data.Key.Key
 import com.imtae.gitcheck.data.domain.User
 import com.imtae.gitcheck.data.repository.ContributionRepository
-import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.LoginActivity
 import com.imtae.gitcheck.ui.ProfileFragment
 import com.imtae.gitcheck.ui.contract.MainContract
@@ -24,11 +23,9 @@ class MainPresenter(
 
     private val pref : PreferenceManager by inject { parametersOf(this) }
 
-    val user : User by inject(named("getUserInfo"))
-
-    private val rxBus : RxBus by inject()
-
     private val currentDate : String by inject(named("getCurrentDate"))
+
+    override val user : User by inject(named("getUserInfo"))
 
     override val todayCommit = MutableLiveData<Int>()
 
@@ -56,16 +53,6 @@ class MainPresenter(
                     compositeDisposable.clear()
                     view.hideProgress()
                 },{ })
-        )
-    }
-
-    override fun getUserInfo(): User = user
-
-    override fun updateUserInfo() {
-        addDisposable(
-            rxBus.listen(User::class.java).subscribe {
-                view.setUser(it)
-            }
         )
     }
 

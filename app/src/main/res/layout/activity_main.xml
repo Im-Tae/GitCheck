@@ -51,6 +51,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         style="@style/black_font_style_bold"
                         android:text="@string/main_title"
+                        android:onClick="@{() -> main.presenter.getTodayContribution()}"
                         />
 
                     <ProgressBar
