@@ -12,7 +12,6 @@ import com.imtae.gitcheck.databinding.FragmentProfileBinding
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.ProgressUtil
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.koin.android.ext.android.inject
@@ -62,7 +61,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         })
 
         presenter.userInfo.observe(viewLifecycleOwner, {
-            Picasso.get().load(it.avatar_url).into(binding.image)
             user.postValue(it)
         })
     }

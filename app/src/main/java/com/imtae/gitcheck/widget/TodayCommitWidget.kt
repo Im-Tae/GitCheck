@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.ui.widget
+package com.imtae.gitcheck.widget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -8,10 +8,8 @@ import android.content.Intent
 import android.view.View
 import android.widget.RemoteViews
 import com.imtae.gitcheck.R
-import com.imtae.gitcheck.retrofit.data.Key
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.retrofit.repository.ContributionRepository
-import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.disposables.CompositeDisposable
 import org.koin.core.KoinComponent
 import org.koin.core.inject

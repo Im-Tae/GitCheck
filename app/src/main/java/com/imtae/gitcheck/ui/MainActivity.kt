@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.imtae.gitcheck.BR
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
@@ -19,7 +18,6 @@ import com.imtae.gitcheck.databinding.NavigationHeaderBinding
 import com.imtae.gitcheck.retrofit.domain.User
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.KeyboardUtil
-import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.tool_bar.*
@@ -56,7 +54,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         presenter.updateUserInfo()
         presenter.getTodayContribution()
 
-        Picasso.get().load(userInfo.avatar_url).into(bindingNavigationHeader.headerImage)
+        //Picasso.get().load(userInfo.avatar_url).into(bindingNavigationHeader.headerImage)
 
         navigation_view.setNavigationItemSelectedListener(this)
         show_navigation_bar_button.setOnClickListener(this)

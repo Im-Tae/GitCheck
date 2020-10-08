@@ -3,7 +3,6 @@ package com.imtae.gitcheck.di.modules
 import android.annotation.SuppressLint
 import android.content.Context
 import com.imtae.gitcheck.retrofit.data.Key
-import com.imtae.gitcheck.ui.widget.TodayCommitWidget
 import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.utils.NetworkUtil
 import com.imtae.gitcheck.utils.PreferenceManager

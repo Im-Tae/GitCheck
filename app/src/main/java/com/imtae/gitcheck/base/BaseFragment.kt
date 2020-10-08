@@ -8,7 +8,6 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.imtae.gitcheck.R
 
 abstract class BaseFragment<B: ViewDataBinding>(
     @LayoutRes private val layoutResId: Int,
