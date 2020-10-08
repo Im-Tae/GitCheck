@@ -1,7 +1,9 @@
 package com.imtae.gitcheck.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
@@ -44,14 +46,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         init()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.updateUserInfo()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter.clearDisposable()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun init() {
 
-        presenter.updateUserInfo()
         presenter.getTodayContribution()
 
         navigation_view.setNavigationItemSelectedListener(this)

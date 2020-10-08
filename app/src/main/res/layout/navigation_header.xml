@@ -36,8 +36,7 @@
             android:textSize="20dp"
             android:gravity="center"
             style="@style/white_font_style_bold"
-            android:visibility="@{headerNavigation.userInfo.name == null  ? View.GONE : View.VISIBLE}"
-            android:text="@{headerNavigation.userInfo.name}"/>
+            bind:setText="@{headerNavigation.userInfo.name}"/>
 
         <TextView
             android:id="@+id/header_nickname"
@@ -46,7 +45,7 @@
             android:textSize="15dp"
             android:gravity="center"
             style="@style/white_font_style_basic"
-            android:text="@{headerNavigation.userInfo.login}"/>
+            bind:setText="@{headerNavigation.userInfo.login}"/>
     </LinearLayout>
 
 </layout>

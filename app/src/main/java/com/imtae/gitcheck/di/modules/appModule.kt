@@ -19,7 +19,7 @@ val appModule = module {
 
     single { PreferenceManager(androidContext()) }
 
-    single(named("getUserInfo")) { PreferenceManager(androidContext()).getUserInfo(Key.User_Info.toString()) }
+    factory(named("getUserInfo")) { PreferenceManager(androidContext()).getUserInfo(Key.User_Info.toString()) }
 
     single { NetworkUtil(androidContext()) }
 

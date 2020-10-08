@@ -7,6 +7,7 @@ import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.LifecycleRegistry
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 
 abstract class BaseActivity<B: ViewDataBinding>(
