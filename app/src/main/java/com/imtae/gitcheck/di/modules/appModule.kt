@@ -2,7 +2,7 @@ package com.imtae.gitcheck.di.modules
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.imtae.gitcheck.retrofit.data.Key
+import com.imtae.gitcheck.data.Key.Key
 import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.utils.NetworkUtil
 import com.imtae.gitcheck.utils.PreferenceManager

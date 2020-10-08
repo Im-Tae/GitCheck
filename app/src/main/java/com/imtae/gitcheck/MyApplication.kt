@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.di.app
+package com.imtae.gitcheck
 
 import android.app.Application
 import com.imtae.gitcheck.di.modules.*

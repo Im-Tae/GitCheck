@@ -1,6 +1,6 @@
 package com.imtae.gitcheck.ui.presenter
 
-import com.imtae.gitcheck.retrofit.data.Key
+import com.imtae.gitcheck.data.Key.Key
 import com.imtae.gitcheck.ui.LoginActivity
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.SplashContract

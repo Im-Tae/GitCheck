@@ -1,14 +1,13 @@
 package com.imtae.gitcheck.ui.presenter
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.imtae.gitcheck.retrofit.data.Key
-import com.imtae.gitcheck.retrofit.domain.Contribution
-import com.imtae.gitcheck.retrofit.domain.ContributionDTO
-import com.imtae.gitcheck.retrofit.domain.Contributions
-import com.imtae.gitcheck.retrofit.domain.User
-import com.imtae.gitcheck.retrofit.repository.ContributionRepository
-import com.imtae.gitcheck.retrofit.repository.UserRepository
+import com.imtae.gitcheck.data.Key.Key
+import com.imtae.gitcheck.data.domain.Contribution
+import com.imtae.gitcheck.data.domain.ContributionDTO
+import com.imtae.gitcheck.data.domain.Contributions
+import com.imtae.gitcheck.data.domain.User
+import com.imtae.gitcheck.data.repository.ContributionRepository
+import com.imtae.gitcheck.data.repository.UserRepository
 import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.PreferenceManager
@@ -16,7 +15,6 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.BiFunction
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
@@ -42,6 +40,8 @@ class ProfilePresenter(
     override val todayCommit = MutableLiveData<Int>()
 
     override val userInfo = MutableLiveData<User>()
+
+    private val _contributionList = ArrayList<ContributionDTO>()
 
     override fun getUserProfile() {
 
@@ -92,8 +92,6 @@ class ProfilePresenter(
     private fun getContributions(userName: String): Single<Contribution> = contribution.getContribution(userName)
 
     private fun setContributions(contribution: Contribution) {
-
-        val _contributionList = ArrayList<ContributionDTO>()
 
         for (year in contribution.years!!) {
             val contributionDTO = ContributionDTO()

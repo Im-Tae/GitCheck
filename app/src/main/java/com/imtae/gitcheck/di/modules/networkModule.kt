@@ -1,9 +1,9 @@
 package com.imtae.gitcheck.di.modules
 
 import com.imtae.gitcheck.BuildConfig
-import com.imtae.gitcheck.retrofit.network.ContributionApi
-import com.imtae.gitcheck.retrofit.network.TokenApi
-import com.imtae.gitcheck.retrofit.network.UserApi
+import com.imtae.gitcheck.data.network.ContributionApi
+import com.imtae.gitcheck.data.network.TokenApi
+import com.imtae.gitcheck.data.network.UserApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named

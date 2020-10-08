@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.retrofit.data
+package com.imtae.gitcheck.data.Key
 
 enum class Key {
     Access_Token,

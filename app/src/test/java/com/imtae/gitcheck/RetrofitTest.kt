@@ -1,15 +1,13 @@
 package com.imtae.gitcheck
 
 import com.imtae.gitcheck.di.modules.networkModule
-import com.imtae.gitcheck.retrofit.domain.User
-import com.imtae.gitcheck.retrofit.network.UserApi
+import com.imtae.gitcheck.data.network.UserApi
 import org.junit.*
 import org.koin.core.KoinComponent
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.core.inject
 import org.koin.core.qualifier.named
-import retrofit2.Response
 
 class RetrofitTest : KoinComponent {
 

@@ -15,7 +15,7 @@ import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityMainBinding
 import com.imtae.gitcheck.databinding.NavigationHeaderBinding
-import com.imtae.gitcheck.retrofit.domain.User
+import com.imtae.gitcheck.data.domain.User
 import com.imtae.gitcheck.ui.contract.MainContract
 import com.imtae.gitcheck.utils.KeyboardUtil
 import io.reactivex.Observable
@@ -53,8 +53,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
         presenter.updateUserInfo()
         presenter.getTodayContribution()
-
-        //Picasso.get().load(userInfo.avatar_url).into(bindingNavigationHeader.headerImage)
 
         navigation_view.setNavigationItemSelectedListener(this)
         show_navigation_bar_button.setOnClickListener(this)

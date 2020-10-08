@@ -2,9 +2,9 @@ package com.imtae.gitcheck.ui.presenter
 
 import android.util.Log
 import com.imtae.gitcheck.BuildConfig
-import com.imtae.gitcheck.retrofit.data.Key
-import com.imtae.gitcheck.retrofit.network.TokenApi
-import com.imtae.gitcheck.retrofit.repository.UserRepository
+import com.imtae.gitcheck.data.Key.Key
+import com.imtae.gitcheck.data.network.TokenApi
+import com.imtae.gitcheck.data.repository.UserRepository
 import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.MainActivity
 import com.imtae.gitcheck.ui.contract.LoginContract

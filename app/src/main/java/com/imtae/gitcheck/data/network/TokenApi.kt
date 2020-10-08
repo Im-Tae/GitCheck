@@ -1,6 +1,6 @@
-package com.imtae.gitcheck.retrofit.network
+package com.imtae.gitcheck.data.network
 
-import com.imtae.gitcheck.retrofit.domain.AccessToken
+import com.imtae.gitcheck.data.domain.AccessToken
 import io.reactivex.Single
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

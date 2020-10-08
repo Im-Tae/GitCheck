@@ -8,8 +8,8 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.imtae.gitcheck.retrofit.data.Key
-import com.imtae.gitcheck.retrofit.domain.User
+import com.imtae.gitcheck.data.Key.Key
+import com.imtae.gitcheck.data.domain.User
 
 
 class PreferenceManager(context : Context) {

@@ -2,9 +2,9 @@ package com.imtae.gitcheck.ui.presenter
 
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
-import com.imtae.gitcheck.retrofit.data.Key
-import com.imtae.gitcheck.retrofit.domain.User
-import com.imtae.gitcheck.retrofit.repository.ContributionRepository
+import com.imtae.gitcheck.data.Key.Key
+import com.imtae.gitcheck.data.domain.User
+import com.imtae.gitcheck.data.repository.ContributionRepository
 import com.imtae.gitcheck.utils.RxBus
 import com.imtae.gitcheck.ui.LoginActivity
 import com.imtae.gitcheck.ui.ProfileFragment

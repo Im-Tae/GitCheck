@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.retrofit.domain
+package com.imtae.gitcheck.data.domain
 
 import com.google.gson.annotations.SerializedName
 

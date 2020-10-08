@@ -1,5 +1,6 @@
 package com.imtae.gitcheck.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
@@ -9,7 +10,7 @@ import com.imtae.gitcheck.R
 import com.imtae.gitcheck.ui.adapter.ContributionAdapter
 import com.imtae.gitcheck.base.BaseFragment
 import com.imtae.gitcheck.databinding.FragmentProfileBinding
-import com.imtae.gitcheck.retrofit.domain.User
+import com.imtae.gitcheck.data.domain.User
 import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.ProgressUtil
 import kotlinx.android.synthetic.main.activity_main.*
@@ -40,6 +41,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
         presenter.clearDisposable()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun init() {
 
         val userName = arguments?.getString("name") ?: ""
@@ -60,9 +62,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
             fragment_commit_textView.text = "${fragment_commit_textView.text} $it"
         })
 
-        presenter.userInfo.observe(viewLifecycleOwner, {
-            user.postValue(it)
-        })
+        presenter.userInfo.observe(viewLifecycleOwner, { user.postValue(it) })
     }
 
     override fun showUserNotFoundUI() {

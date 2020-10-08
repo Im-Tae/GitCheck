@@ -6,7 +6,7 @@ import android.widget.LinearLayout
 import androidx.core.view.setMargins
 import androidx.recyclerview.widget.RecyclerView
 import com.imtae.gitcheck.R
-import com.imtae.gitcheck.retrofit.domain.ContributionDTO
+import com.imtae.gitcheck.data.domain.ContributionDTO
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.createBalloon
 import kotlinx.android.synthetic.main.contributions_layout.view.*

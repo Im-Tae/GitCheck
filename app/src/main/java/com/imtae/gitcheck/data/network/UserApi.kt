@@ -1,6 +1,6 @@
-package com.imtae.gitcheck.retrofit.network
+package com.imtae.gitcheck.data.network
 
-import com.imtae.gitcheck.retrofit.domain.User
+import com.imtae.gitcheck.data.domain.User
 import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.GET

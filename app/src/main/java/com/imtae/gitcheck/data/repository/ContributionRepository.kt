@@ -1,8 +1,8 @@
-package com.imtae.gitcheck.retrofit.repository
+package com.imtae.gitcheck.data.repository
 
-import com.imtae.gitcheck.retrofit.domain.Contribution
-import com.imtae.gitcheck.retrofit.domain.Contributions
-import com.imtae.gitcheck.retrofit.network.ContributionApi
+import com.imtae.gitcheck.data.domain.Contribution
+import com.imtae.gitcheck.data.domain.Contributions
+import com.imtae.gitcheck.data.network.ContributionApi
 import com.imtae.gitcheck.utils.NetworkUtil
 import io.reactivex.Flowable
 import io.reactivex.Single

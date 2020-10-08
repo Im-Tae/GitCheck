@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.retrofit.domain
+package com.imtae.gitcheck.data.domain
 
 data class Contribution (
     val years: ArrayList<Year>? = null,
