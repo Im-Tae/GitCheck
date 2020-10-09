@@ -97,7 +97,7 @@ class ProfilePresenter(
             val contributionInfoList = ArrayList<ContributionDTO.ContributionInfo>()
 
             addDisposable(
-                Observable.range(0, contribution.contributions!!.size - 1)
+                Observable.range(0, contribution.contributions!!.size)
                     .map { contribution.contributions[it] }
                     .filter { it.date!!.contains(year.year!!) }
                     .subscribe {
