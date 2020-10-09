@@ -7,6 +7,7 @@ import androidx.core.view.setMargins
 import androidx.recyclerview.widget.RecyclerView
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.data.domain.ContributionDTO
+import com.jakewharton.rxbinding4.view.clicks
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.createBalloon
 import kotlinx.android.synthetic.main.contributions_layout.view.*
@@ -28,7 +29,7 @@ class ContributionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
                 setBackgroundColor(Color.parseColor(contributionList.contributionInfoList[commitIndex].color))
             }
 
-            layout.setOnClickListener {
+            layout.clicks().subscribe {
 
                 val showContributionBalloon = createBalloon(itemView.context) {
                     setText("${contributionList.contributionInfoList[commitIndex].date} \n ${contributionList.contributionInfoList[commitIndex].count}")
