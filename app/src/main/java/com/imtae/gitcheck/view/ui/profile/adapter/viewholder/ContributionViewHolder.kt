@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.ui.adapter.viewHolder
+package com.imtae.gitcheck.view.ui.profile.adapter.viewholder
 
 import android.graphics.Color
 import android.view.View

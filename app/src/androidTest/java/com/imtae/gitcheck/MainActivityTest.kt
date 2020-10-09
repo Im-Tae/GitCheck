@@ -7,7 +7,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
-import com.imtae.gitcheck.ui.MainActivity
+import com.imtae.gitcheck.view.ui.main.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

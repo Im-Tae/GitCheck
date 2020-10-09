@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_settings"
-        android:title="@string/settings"
+        android:id="@+id/nav_info"
+        android:title="@string/info"
+        />
+
+    <item
+        android:id="@+id/nav_support"
+        android:title="@string/support"
         />
 
     <item

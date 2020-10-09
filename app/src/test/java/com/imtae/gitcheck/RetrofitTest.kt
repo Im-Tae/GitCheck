@@ -1,6 +1,6 @@
 package com.imtae.gitcheck
 
-import com.imtae.gitcheck.di.modules.networkModule
+import com.imtae.gitcheck.di.networkModule
 import com.imtae.gitcheck.data.network.UserApi
 import org.junit.*
 import org.koin.core.KoinComponent

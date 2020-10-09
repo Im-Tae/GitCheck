@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.ui
+package com.imtae.gitcheck.view.ui.login
 
 import android.content.Intent
 import android.net.Uri
@@ -8,7 +8,6 @@ import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityLoginBinding
-import com.imtae.gitcheck.ui.contract.LoginContract
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 

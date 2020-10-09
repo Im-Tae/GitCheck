@@ -1,6 +1,6 @@
 package com.imtae.gitcheck
 
-import com.imtae.gitcheck.di.modules.*
+import com.imtae.gitcheck.di.*
 import org.junit.*
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin

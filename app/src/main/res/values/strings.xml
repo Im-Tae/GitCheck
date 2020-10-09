@@ -4,7 +4,8 @@
     <string name="main_content">Search for the commit.</string>
     <string name="profile_name">Name</string>
     <string name="profile_nickname">NickName</string>
-    <string name="settings">Settings</string>
+    <string name="info">Info</string>
+    <string name="support">Support</string>
     <string name="logout">Logout</string>
     <string name="github_login">Github Login</string>
     <string name="followers">followers ·</string>
@@ -18,7 +19,7 @@
     <string name="sat">Sat</string>
     <string name="total">"Total : "</string>
     <string name="no_user">No User Found</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

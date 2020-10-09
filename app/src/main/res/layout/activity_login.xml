@@ -5,7 +5,7 @@
     <data>
         <variable
             name="login"
-            type="com.imtae.gitcheck.ui.LoginActivity" />
+            type="com.imtae.gitcheck.view.ui.login.LoginActivity" />
     </data>
 
     <LinearLayout
@@ -16,7 +16,7 @@
         android:background="@color/white"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context=".ui.LoginActivity">
+        tools:context=".view.ui.login.LoginActivity">
 
         <ImageView
             android:layout_width="200dp"

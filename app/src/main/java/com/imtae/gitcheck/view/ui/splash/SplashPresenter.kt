@@ -1,9 +1,8 @@
-package com.imtae.gitcheck.ui.presenter
+package com.imtae.gitcheck.view.ui.splash
 
 import com.imtae.gitcheck.data.Key.Key
-import com.imtae.gitcheck.ui.LoginActivity
-import com.imtae.gitcheck.ui.MainActivity
-import com.imtae.gitcheck.ui.contract.SplashContract
+import com.imtae.gitcheck.view.ui.login.LoginActivity
+import com.imtae.gitcheck.view.ui.main.MainActivity
 import com.imtae.gitcheck.utils.NetworkUtil
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.Observable
@@ -26,7 +25,8 @@ class SplashPresenter(
     override fun checkUserInfo() {
 
         when {
-            pref.getData(Key.Access_Token.toString()) != Key.NULL.toString() && networkUtil.networkInfo() -> view.startActivity(MainActivity::class.java)
+            pref.getData(Key.Access_Token.toString()) != Key.NULL.toString() && networkUtil.networkInfo() -> view.startActivity(
+                MainActivity::class.java)
             !networkUtil.networkInfo() -> {}
             else -> {
                 addDisposable(

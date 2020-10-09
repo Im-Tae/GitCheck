@@ -5,7 +5,7 @@
     <data>
         <variable
             name="headerNavigation"
-            type="com.imtae.gitcheck.ui.MainActivity" />
+            type="com.imtae.gitcheck.view.ui.main.MainActivity" />
 
             <import type="android.view.View"/>
     </data>

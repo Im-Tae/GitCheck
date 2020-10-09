@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.ui.contract
+package com.imtae.gitcheck.view.ui.login
 
 import com.imtae.gitcheck.base.BasePresenter
 import com.imtae.gitcheck.base.BaseView

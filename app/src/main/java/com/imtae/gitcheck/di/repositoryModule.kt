@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.di.modules
+package com.imtae.gitcheck.di
 
 import com.imtae.gitcheck.data.repository.ContributionRepository
 import com.imtae.gitcheck.data.repository.UserRepository

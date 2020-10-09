@@ -1,11 +1,11 @@
-package com.imtae.gitcheck.di.modules
+package com.imtae.gitcheck.di
 
-import com.imtae.gitcheck.ui.contract.LoginContract
-import com.imtae.gitcheck.ui.contract.MainContract
-import com.imtae.gitcheck.ui.contract.SplashContract
-import com.imtae.gitcheck.ui.presenter.LoginPresenter
-import com.imtae.gitcheck.ui.presenter.MainPresenter
-import com.imtae.gitcheck.ui.presenter.SplashPresenter
+import com.imtae.gitcheck.view.ui.login.LoginContract
+import com.imtae.gitcheck.view.ui.main.MainContract
+import com.imtae.gitcheck.view.ui.splash.SplashContract
+import com.imtae.gitcheck.view.ui.login.LoginPresenter
+import com.imtae.gitcheck.view.ui.main.MainPresenter
+import com.imtae.gitcheck.view.ui.splash.SplashPresenter
 import org.koin.dsl.module
 
 val activityModule = module {

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <receiver android:name="com.imtae.gitcheck.ui.widget.TodayCommitWidget">
+        <receiver android:name="com.imtae.gitcheck.view.widget.TodayCommitWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -24,14 +24,14 @@
                 android:resource="@xml/today_commit_widget_provider" />
         </receiver>
 
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".view.ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name=".view.ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -43,7 +43,7 @@
                     android:scheme="gitcheck" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".view.ui.main.MainActivity" />
     </application>
 
 </manifest>

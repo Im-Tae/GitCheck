@@ -1,13 +1,12 @@
-package com.imtae.gitcheck.ui.presenter
+package com.imtae.gitcheck.view.ui.main
 
 import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import com.imtae.gitcheck.data.Key.Key
 import com.imtae.gitcheck.data.domain.User
 import com.imtae.gitcheck.data.repository.ContributionRepository
-import com.imtae.gitcheck.ui.LoginActivity
-import com.imtae.gitcheck.ui.ProfileFragment
-import com.imtae.gitcheck.ui.contract.MainContract
+import com.imtae.gitcheck.view.ui.login.LoginActivity
+import com.imtae.gitcheck.view.ui.profile.ProfileFragment
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

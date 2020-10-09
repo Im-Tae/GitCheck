@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.ui
+package com.imtae.gitcheck.view.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,6 @@ import com.imtae.gitcheck.BR
 import com.imtae.gitcheck.R
 import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivitySplashBinding
-import com.imtae.gitcheck.ui.contract.SplashContract
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 

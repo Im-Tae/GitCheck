@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.di.modules
+package com.imtae.gitcheck.di
 
 import android.annotation.SuppressLint
 import android.content.Context

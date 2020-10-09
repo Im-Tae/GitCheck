@@ -1,12 +1,11 @@
-package com.imtae.gitcheck.ui.presenter
+package com.imtae.gitcheck.view.ui.login
 
 import android.util.Log
 import com.imtae.gitcheck.BuildConfig
 import com.imtae.gitcheck.data.Key.Key
 import com.imtae.gitcheck.data.network.TokenApi
 import com.imtae.gitcheck.data.repository.UserRepository
-import com.imtae.gitcheck.ui.MainActivity
-import com.imtae.gitcheck.ui.contract.LoginContract
+import com.imtae.gitcheck.view.ui.main.MainActivity
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

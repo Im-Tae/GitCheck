@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.ui.contract
+package com.imtae.gitcheck.view.ui.main
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData

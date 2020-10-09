@@ -1,7 +1,7 @@
-package com.imtae.gitcheck.di.modules
+package com.imtae.gitcheck.di
 
-import com.imtae.gitcheck.ui.contract.ProfileContract
-import com.imtae.gitcheck.ui.presenter.ProfilePresenter
+import com.imtae.gitcheck.view.ui.profile.ProfileContract
+import com.imtae.gitcheck.view.ui.profile.ProfilePresenter
 import org.koin.dsl.module
 
 val fragmentModule = module {

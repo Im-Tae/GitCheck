@@ -1,11 +1,11 @@
-package com.imtae.gitcheck.ui.adapter
+package com.imtae.gitcheck.view.ui.profile.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.imtae.gitcheck.R
-import com.imtae.gitcheck.ui.adapter.viewHolder.ContributionViewHolder
 import com.imtae.gitcheck.data.domain.ContributionDTO
+import com.imtae.gitcheck.view.ui.profile.adapter.viewholder.ContributionViewHolder
 
 class ContributionAdapter(private val contributionList: ArrayList<ContributionDTO>) : RecyclerView.Adapter<ContributionViewHolder>() {
 

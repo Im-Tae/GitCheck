@@ -1,9 +1,8 @@
-package com.imtae.gitcheck.ui
+package com.imtae.gitcheck.view.ui.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
@@ -18,8 +17,9 @@ import com.imtae.gitcheck.base.BaseActivity
 import com.imtae.gitcheck.databinding.ActivityMainBinding
 import com.imtae.gitcheck.databinding.NavigationHeaderBinding
 import com.imtae.gitcheck.data.domain.User
-import com.imtae.gitcheck.ui.contract.MainContract
+import com.imtae.gitcheck.view.ui.profile.ProfileFragment
 import com.imtae.gitcheck.utils.KeyboardUtil
+import com.imtae.gitcheck.view.ui.info.InfoFragment
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.tool_bar.*
@@ -127,7 +127,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
     override fun onNavigationItemSelected(item : MenuItem): Boolean {
 
         when(item.itemId) {
-            R.id.nav_settings -> showToast("준비중")
+            R.id.nav_info -> showFragment(InfoFragment())
+            R.id.nav_support -> showToast("준비중")
             R.id.nav_logout -> {
                 presenter.logout()
                 finish()

@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.ui.widget
+package com.imtae.gitcheck.view.widget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager

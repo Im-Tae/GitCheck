@@ -3,7 +3,7 @@
     <data>
         <variable
             name="splash"
-            type="com.imtae.gitcheck.ui.SplashActivity" />
+            type="com.imtae.gitcheck.view.ui.splash.SplashActivity" />
     </data>
 
     <LinearLayout
@@ -12,7 +12,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.SplashActivity"
+        tools:context=".view.ui.splash.SplashActivity"
         android:background="@color/github_color">
 
         <ImageView

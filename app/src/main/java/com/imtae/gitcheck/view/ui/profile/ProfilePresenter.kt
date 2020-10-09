@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.ui.presenter
+package com.imtae.gitcheck.view.ui.profile
 
 import androidx.lifecycle.MutableLiveData
 import com.imtae.gitcheck.data.Key.Key
@@ -8,7 +8,6 @@ import com.imtae.gitcheck.data.domain.Contributions
 import com.imtae.gitcheck.data.domain.User
 import com.imtae.gitcheck.data.repository.ContributionRepository
 import com.imtae.gitcheck.data.repository.UserRepository
-import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.PreferenceManager
 import io.reactivex.Observable
 import io.reactivex.Single

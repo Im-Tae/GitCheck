@@ -6,7 +6,8 @@
     <string name="profile_name">이름</string>
     <string name="profile_nickname">닉네임</string>
     <string name="logout">로그아웃</string>
-    <string name="settings">환경설정</string>
+    <string name="support">커피 한잔 사주기</string>
+    <string name="info">정보</string>
     <string name="github_login">Github 로그인</string>
     <string name="followers">팔로워 ·</string>
     <string name="following">팔로잉</string>

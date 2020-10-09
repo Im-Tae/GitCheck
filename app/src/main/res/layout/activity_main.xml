@@ -4,7 +4,7 @@
     <data>
         <variable
             name="main"
-            type="com.imtae.gitcheck.ui.MainActivity" />
+            type="com.imtae.gitcheck.view.ui.main.MainActivity" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".ui.MainActivity"
+        tools:context=".view.ui.main.MainActivity"
         android:id="@+id/drawer_layout">
 
         <LinearLayout

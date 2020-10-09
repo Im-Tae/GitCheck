@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.ui.contract
+package com.imtae.gitcheck.view.ui.profile
 
 import androidx.lifecycle.MutableLiveData
 import com.imtae.gitcheck.base.BasePresenter

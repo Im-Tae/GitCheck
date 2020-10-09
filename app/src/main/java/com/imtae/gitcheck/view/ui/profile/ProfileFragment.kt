@@ -1,4 +1,4 @@
-package com.imtae.gitcheck.ui
+package com.imtae.gitcheck.view.ui.profile
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,11 +7,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.MutableLiveData
 import com.imtae.gitcheck.BR
 import com.imtae.gitcheck.R
-import com.imtae.gitcheck.ui.adapter.ContributionAdapter
+import com.imtae.gitcheck.view.ui.profile.adapter.ContributionAdapter
 import com.imtae.gitcheck.base.BaseFragment
 import com.imtae.gitcheck.databinding.FragmentProfileBinding
 import com.imtae.gitcheck.data.domain.User
-import com.imtae.gitcheck.ui.contract.ProfileContract
 import com.imtae.gitcheck.utils.ProgressUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
