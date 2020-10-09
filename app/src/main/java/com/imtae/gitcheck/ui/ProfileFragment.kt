@@ -44,6 +44,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(
     @SuppressLint("SetTextI18n")
     override fun init() {
 
+        activity?.drawer_layout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+
         val userName = arguments?.getString("name") ?: ""
 
         if (userName.isNotEmpty()) {
