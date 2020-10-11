@@ -19,7 +19,6 @@
     <string name="sat">Sat</string>
     <string name="total">"Total : "</string>
     <string name="no_user">No User Found</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="developer">Developer</string>
 
 </resources>
